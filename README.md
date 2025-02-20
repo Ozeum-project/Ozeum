@@ -26,5 +26,5 @@ Ozeum est un site web permettant aux artistes de partager et vendre leurs créat
 
 ### 1️⃣ Cloner le projet  
 ```bash
-git clone [https://github.com/utilisateur/nom-du-repo.git](https://github.com/Ozeum-project/Ozeum.git)
+git clone https://github.com/Ozeum-project/Ozeum.git
 cd Ozeum
