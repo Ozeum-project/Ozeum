@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ozeum - Product Detail</title>
+    <link rel="stylesheet" href="productDetails.css">
+</head>
+<body>
+    <!-- Previous HTML structure remains the same -->
+    <header class="header">
+        <div class="logo">ozeum</div>
+        <nav class="nav-menu">
+            <a href="#">Home</a>
+            <a href="#">Exhibitions</a>
+            <a href="#">Collections</a>
+            <a href="#">About Us</a>
+            <a href="#">Pages</a>
+            <a href="#">Blog</a>
+            <a href="#">Shop</a>
+            <a href="#">Contacts</a>
+            <a href="#">Profile</a>
+        </nav>
+    </header>
+<div class="hero">
+        <div class="hero-content">
+            <h1>Cart</h1>
+            <div class="breadcrumb">
+                <a href="#">Home</a> / Cart
+            </div>
+        </div>
+    </div>
+    <!-- Cart Overlay -->
+    <!-- <div class="overlay-background"></div>
+    <div class="cart-overlay">
+        <div class="cart-header">
+            <h2>Your Cart</h2>
+            <button class="close-cart">&times;</button>
+        </div>
+        <div class="cart-items">
+            <!-- Cart items will be added here dynamically -->
+        <!-- </div>
+        <div class="cart-total">
+            <span>Total:</span>
+            <span class="total-amount">$0.00</span>
+        </div>
+        <a href="#" class="checkout-btn">Proceed to Checkout</a>
+    </div> --> 
+
+    <div class="container">
+        <div class="notification">
+            <span>3 × "Woman Eating" have been added to your cart.</span>
+            <button class="view-cart-btn" onclick="window.location.href='cart.html'">VIEW CART</button>
+        </div>
+
+        <div class="product-section">
+            <!-- Product content -->
+            <div class="product-image-container">
+                <span class="sale-badge">-20%</span>
+                <div class="zoom-container">
+                    <img src="https://th.bing.com/th/id/OIP.P5tEClpAS8mRDclhB-MypQHaF5?rs=1&pid=ImgDetMain" alt="Woman Eating" class="product-image">
+                    <div class="zoom-lens"></div>
+                </div>
+            </div>
+
+            <div class="product-info">
+                <h1>Woman Eating</h1>
+                <div class="price">
+                    <span class="original-price">$15.00</span>
+                    <span class="sale-price">$12.00</span>
+                </div>
+                <p class="description">
+                    Etiam semper, nunc vitae volutpat efficitur, elit nibh egestas velit, sit amet euismod justo justo pharetra ipsum. Mauris tincidunt erat magna, ut fringilla erat ultrices et. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Aenean a dolor turpis. Aenean tristique metus diam, id mollis magna efficitur nec.
+                </p>
+                <div class="purchase-section">
+                    <input type="number" value="3" min="1" class="quantity">
+                    <button class="buy-now-btn">BUY NOW</button>
+                </div>
+                <div class="product-meta">
+                    <p>Category: <a href="#">Artist</a></p>
+                    <p>Tags: <a href="#">Art</a>, <a href="#">Book</a>, <a href="#">Exhibition</a></p>
+                    <p>Product ID: 5157</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Zoom functionality
+            const container = document.querySelector('.zoom-container');
+            const img = container.querySelector('.product-image');
+            const lens = container.querySelector('.zoom-lens');
+            
+            const zoomLevel = 2.5;
+            
+            container.addEventListener('mousemove', function(e) {
+                const rect = container.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                const xPercent = (x / rect.width) * 100;
+                const yPercent = (y / rect.height) * 100;
+                
+                lens.style.backgroundImage = `url(${img.src})`;
+                lens.style.backgroundSize = `${zoomLevel * 100}%`;
+                lens.style.backgroundPosition = `${xPercent}% ${yPercent}%`;
+            });
+            
+            container.addEventListener('mouseenter', function() {
+                lens.style.opacity = 1;
+            });
+            
+            container.addEventListener('mouseleave', function() {
+                lens.style.opacity = 0;
+            });
+
+            // Cart functionality
+            const buyNowBtn = document.querySelector('.buy-now-btn');
+            const viewCartBtn = document.querySelector('.view-cart-btn');
+            const cartOverlay = document.querySelector('.cart-overlay');
+            const closeCartBtn = document.querySelector('.close-cart');
+            const overlayBg = document.querySelector('.overlay-background');
+            const quantityInput = document.querySelector('.quantity');
+            const cartItems = document.querySelector('.cart-items');
+            const totalAmount = document.querySelector('.total-amount');
+
+            function openCart() {
+                cartOverlay.classList.add('active');
+                overlayBg.classList.add('active');
+                updateCart();
+            }
+
+            function closeCart() {
+                cartOverlay.classList.remove('active');
+                overlayBg.classList.remove('active');
+            }
+
+            function updateCart() {
+                const quantity = parseInt(quantityInput.value);
+                const price = 12.00; // Sale price
+                const total = quantity * price;
+
+                cartItems.innerHTML = `
+                    <div class="cart-item">
+                        <img src="/api/placeholder/80/80" alt="Woman Eating">
+                        <div class="cart-item-details">
+                            <h3>Woman Eating</h3>
+                            <p class="cart-item-price">$${price.toFixed(2)} × ${quantity}</p>
+                        </div>
+                        <span class="cart-item-total">$${(price * quantity).toFixed(2)}</span>
+                    </div>
+                `;
+
+                totalAmount.textContent = `$${total.toFixed(2)}`;
+            }
+
+            buyNowBtn.addEventListener('click', openCart);
+            viewCartBtn.addEventListener('click', openCart);
+            closeCartBtn.addEventListener('click', closeCart);
+            overlayBg.addEventListener('click', closeCart);
+
+            // Update cart when quantity changes
+            quantityInput.addEventListener('change', updateCart);
+        });
+    </script>
+</body>
+</html>

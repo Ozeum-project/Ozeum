@@ -1,0 +1,247 @@
+ 
+:root {
+            --primary-color: #b8860b;
+            --secondary-color: #1a1a1a;
+            --border-color: #e5e5e5;
+            --background-color: #f5f5f5;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+.header {
+    background: var(--secondary-color);
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center; 
+    position: fixed; /* Fixe la navbar en haut */
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000; /* Assure qu'elle est au-dessus du contenu */
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Effet d'ombre pour la visibilité */
+}
+
+body {
+    padding-top: 50px; /* Ajoute un espace en haut pour éviter que le contenu soit caché sous la navbar */
+}
+
+.logo {
+    color: #fff;
+    font-size: 2rem;
+    font-weight: bold;
+}
+
+.nav-menu {
+    display: flex;
+    gap: 2rem;
+}
+
+.nav-menu a {
+    color: #fff;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-size: 0.9rem;
+    transition: color 0.3s ease;
+}
+
+.nav-menu a:hover {
+    color: var(--primary-color);
+}
+
+        .cart-container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+
+        .cart-status {
+            background-color: var(--background-color);
+            padding: 0.75rem;
+            margin-bottom: 2rem;
+            border-radius: 4px;
+        }
+
+        .cart-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 2rem;
+        }
+
+        .cart-table th {
+            background-color: var(--secondary-color);
+            color: white;
+            text-align: left;
+            padding: 1rem;
+        }
+
+        .cart-table td {
+            padding: 1rem;
+            border-bottom: 1px solid var(--border-color);
+            vertical-align: middle;
+        }
+
+        .product-info {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .product-image {
+            width: 60px;
+            height: 60px;
+            object-fit: cover;
+        }
+
+        .remove-item {
+            color: #999;
+            cursor: pointer;
+            background: none;
+            border: none;
+            padding: 0.5rem;
+        }
+
+        .quantity-input {
+            width: 100px;
+            padding: 0.5rem;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            text-align: center;
+            position: relative;
+        }
+
+        .quantity-selector {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .quantity-arrows {
+            position: absolute;
+            right: 8px;
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+
+        .arrow {
+            cursor: pointer;
+            font-size: 12px;
+            color: #666;
+        }
+
+        .coupon-section {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .coupon-input {
+            padding: 0.75rem;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            flex-grow: 1;
+            max-width: 200px;
+        }
+
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .btn-primary {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        .btn-secondary {
+            background-color: #999;
+            color: white;
+        }
+
+        .cart-totals {
+            max-width: 400px;
+            margin-left: auto;
+        }
+
+        .totals-table {
+            width: 100%;
+            margin-bottom: 1rem;
+        }
+
+        .totals-table th {
+            background-color: var(--secondary-color);
+            color: white;
+            text-align: left;
+            padding: 0.75rem;
+        }
+
+        .totals-table td {
+            padding: 0.75rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .shipping-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .change-address {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-size: 0.9rem;
+        }
+
+        .checkout-btn {
+            width: 100%;
+            padding: 1rem;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+            text-transform: uppercase;
+        } 
+         .hero {
+            height: 400px;
+            background-image: url('https://th.bing.com/th/id/OIP.P5tEClpAS8mRDclhB-MypQHaF5?rs=1&pid=ImgDetMain');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            position: relative;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.4);
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+            color: var(--primary-color);
+        }

@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopping Cart</title>
+    <link rel="stylesheet" href="cart.css">
+</head> 
+  <header class="header">
+        <div class="logo">ozeum</div>
+        <nav class="nav-menu">
+            <a href="#">Home</a>
+            <a href="#">Exhibitions</a>
+            <a href="#">Collections</a>
+            <a href="#">About Us</a>
+            <a href="#">Evénements</a>
+            <a href="#">Blog</a>
+            <a href="#">Shop</a>
+            <a href="#">Contacts</a>
+            <a href="#">Profile</a>
+        </nav>
+    </header>
+<body> 
+     <div class="hero">
+        <div class="hero-content">
+            <h1>Shop</h1>
+            <div class="breadcrumb">
+                <a href="#">Home</a> / Shop
+            </div>
+        </div>
+    </div>
+    <div class="cart-container">
+        <div class="cart-status">Cart updated.</div>
+
+        <table class="cart-table">
+            <thead>
+                <tr>
+                    <th>Product</th>
+                    <th>Price</th>
+                    <th>Quantity</th>
+                    <th>Subtotal</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        <div class="product-info">
+                            <button class="remove-item">×</button>
+                            <img src="https://th.bing.com/th/id/OIP.P5tEClpAS8mRDclhB-MypQHaF5?rs=1&pid=ImgDetMain" alt="Boy with a Book" class="product-image">
+                            <span>Boy with a Book</span>
+                        </div>
+                    </td>
+                    <td>$12.00</td>
+                    <td>
+                        <div class="quantity-selector">
+                            <input type="text" value="2" class="quantity-input">
+                            <div class="quantity-arrows">
+                                <span class="arrow">▲</span>
+                                <span class="arrow">▼</span>
+                            </div>
+                        </div>
+                    </td>
+                    <td>$24.00</td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="product-info">
+                            <button class="remove-item">×</button>
+                            <img src="https://th.bing.com/th/id/OIP.P5tEClpAS8mRDclhB-MypQHaF5?rs=1&pid=ImgDetMain" alt="Boy with a Book" class="product-image">
+                            <span>Boy with a Book</span>
+                        </div>
+                    </td>
+                    <td>$12.00</td>
+                    <td>
+                        <div class="quantity-selector">
+                            <input type="text" value="2" class="quantity-input">
+                            <div class="quantity-arrows">
+                                <span class="arrow">▲</span>
+                                <span class="arrow">▼</span>
+                            </div>
+                        </div>
+                    </td>
+                    <td>$24.00</td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="product-info">
+                            <button class="remove-item">×</button>
+                            <img src="https://th.bing.com/th/id/OIP.P5tEClpAS8mRDclhB-MypQHaF5?rs=1&pid=ImgDetMain" alt="Boy with a Book" class="product-image">
+                            <span>Boy with a Book</span>
+                        </div>
+                    </td>
+                    <td>$12.00</td>
+                    <td>
+                        <div class="quantity-selector">
+                            <input type="text" value="2" class="quantity-input">
+                            <div class="quantity-arrows">
+                                <span class="arrow">▲</span>
+                                <span class="arrow">▼</span>
+                            </div>
+                        </div>
+                    </td>
+                    <td>$24.00</td>
+                </tr>
+                <!-- Additional cart items would go here -->
+            </tbody>
+        </table>
+
+        <div class="coupon-section">
+            <input type="text" placeholder="Coupon code" class="coupon-input">
+            <button class="btn btn-primary">APPLY COUPON</button>
+            <button class="btn btn-secondary">UPDATE CART</button>
+        </div>
+
+        <div class="cart-totals">
+            <table class="totals-table">
+                <tr>
+                    <th colspan="2">Cart totals</th>
+                </tr>
+                <tr>
+                    <td>Subtotal</td>
+                    <td>$96.00</td>
+                </tr>
+                <tr>
+                    <td>Shipping</td>
+                    <td>
+                        <div class="shipping-info">
+                            <div>
+                                <div>Flat rate: $25.00</div>
+                                <div>Shipping to Tunisia</div>
+                            </div>
+                            <a href="#" class="change-address">Change address</a>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Total</td>
+                    <td>$121.00</td>
+                </tr>
+            </table>
+
+            <button class="checkout-btn">PROCEED TO CHECKOUT</button>
+        </div>
+    </div>
+</body>
+</html>
