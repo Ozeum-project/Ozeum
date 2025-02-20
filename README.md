@@ -1,5 +1,5 @@
 # Ozeum 
-# 🎨 Boutique d'Art - [Nom du Site]
+# 🎨 Boutique d'Art - Ozeum
 
 Bienvenue sur Ozeum, une plateforme dédiée aux passionnés d'art, aux artistes et aux amateurs d'œuvres uniques ! 🖌️✨  
 
