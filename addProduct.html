@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ozeum Admin - Add Product</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f8f8;
+        }
+        
+        header {
+            background-color: #000;
+            padding: 15px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            color: white;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        
+        nav {
+            display: flex;
+        }
+        
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin-left: 20px;
+            font-size: 14px;
+        }
+        
+        .breadcrumb {
+            background-color: rgba(0,0,0,0.7);
+            color: white;
+            padding: 10px 30px;
+        }
+        
+        .breadcrumb a {
+            color: white;
+            text-decoration: none;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 0 15px;
+            display: flex;
+            gap: 30px;
+        }
+        
+        .main-content {
+            flex: 3;
+            background: white;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        .sidebar {
+            flex: 1;
+            background: white;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        h1 {
+            border-bottom: 3px solid #f0c14b;
+            padding-bottom: 10px;
+            margin-top: 0;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        
+        input[type="text"],
+        input[type="number"],
+        select,
+        textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+        
+        .price-inputs {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .price-inputs > div {
+            flex: 1;
+        }
+        
+        .categories {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+        
+        .categories label {
+            display: inline-flex;
+            align-items: center;
+            font-weight: normal;
+            margin-right: 10px;
+        }
+        
+        .categories input {
+            margin-right: 5px;
+            width: auto;
+        }
+        
+        .image-preview {
+            width: 100%;
+            height: 200px;
+            border: 2px dashed #ddd;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 10px;
+            background-color: #f9f9f9;
+        }
+        
+        .image-preview img {
+            max-width: 100%;
+            max-height: 100%;
+            display: none;
+        }
+        
+        .btn {
+            padding: 10px 20px;
+            background-color: #f0c14b;
+            color: #000;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        
+        .btn-secondary {
+            background-color: #ddd;
+        }
+        
+        .actions {
+            display: flex;
+            gap: 10px;
+            justify-content: flex-end;
+            margin-top: 20px;
+        }
+        
+        .product-stats {
+            margin-top: 20px;
+        }
+        
+        .stat-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .recent-activity {
+            margin-top: 20px;
+        }
+        
+        .activity-item {
+            padding: 10px 0;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .activity-item .time {
+            color: #999;
+            font-size: 0.8em;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">ozeum</div>
+        <nav>
+            <a href="#">HOME</a>
+            <a href="#">EXHIBITIONS</a>
+            <a href="#">COLLECTIONS</a>
+            <a href="#">ABOUT US</a>
+            <a href="#">PAGES</a>
+            <a href="#">BLOG</a>
+            <a href="#">SHOP</a>
+            <a href="#">CONTACTS</a>
+            <a href="#">PROFILE</a>
+        </nav>
+    </header>
+    
+    <div class="breadcrumb">
+        <a href="#">Home</a> / <a href="#">Admin</a> / Add Product
+    </div>
+    
+    <div class="container">
+        <div class="main-content">
+            <h1>Add New Product</h1>
+            
+            <form>
+                <div class="form-group">
+                    <label for="product-title">Product Title</label>
+                    <input type="text" id="product-title" placeholder="Enter product title">
+                </div>
+                
+                <div class="form-group">
+                    <label>Categories</label>
+                    <div class="categories">
+                        <label><input type="checkbox" value="ART"> ART</label>
+                        <label><input type="checkbox" value="BOOK"> BOOK</label>
+                        <label><input type="checkbox" value="EXHIBITION"> EXHIBITION</label>
+                        <label><input type="checkbox" value="PAINTING"> PAINTING</label>
+                        <label><input type="checkbox" value="SCULPTURE"> SCULPTURE</label>
+                    </div>
+                </div>
+                
+                <div class="form-group price-inputs">
+                    <div>
+                        <label for="regular-price">Regular Price ($)</label>
+                        <input type="number" id="regular-price" placeholder="15.00">
+                    </div>
+                    <div>
+                        <label for="sale-price">Sale Price ($)</label>
+                        <input type="number" id="sale-price" placeholder="12.00">
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="product-description">Product Description</label>
+                    <textarea id="product-description" rows="5" placeholder="Enter product description"></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label for="product-image">Product Image</label>
+                    <div class="image-preview">
+                        <span>Drop image here or click to upload</span>
+                        <img id="preview-img">
+                    </div>
+                    <input type="file" id="product-image" accept="image/*" style="display: none;">
+                    <button type="button" class="btn btn-secondary" onclick="document.getElementById('product-image').click()">Select Image</button>
+                </div>
+                
+                <div class="form-group">
+                    <label for="stock-quantity">Stock Quantity</label>
+                    <input type="number" id="stock-quantity" placeholder="Enter quantity">
+                </div>
+                
+                <div class="actions">
+                    <button type="button" class="btn btn-secondary">Cancel</button>
+                    <button type="submit" class="btn">Add Product</button>
+                </div>
+            </form>
+        </div>
+        
+        <div class="sidebar">
+            <h2>Dashboard</h2>
+            
+            <div class="product-stats">
+                <h3>Product Statistics</h3>
+                <div class="stat-item">
+                    <span>Total Products:</span>
+                    <strong>24</strong>
+                </div>
+                <div class="stat-item">
+                    <span>Active Products:</span>
+                    <strong>20</strong>
+                </div>
+                <div class="stat-item">
+                    <span>Out of Stock:</span>
+                    <strong>2</strong>
+                </div>
+                <div class="stat-item">
+                    <span>On Sale:</span>
+                    <strong>8</strong>
+                </div>
+            </div>
+            
+            <div class="recent-activity">
+                <h3>Recent Activity</h3>
+                <div class="activity-item">
+                    <div>Added "Woman Eating"</div>
+                    <div class="time">2 hours ago</div>
+                </div>
+                <div class="activity-item">
+                    <div>Updated "Boy with a Book"</div>
+                    <div class="time">Yesterday</div>
+                </div>
+                <div class="activity-item">
+                    <div>Deleted "Abstract Landscape"</div>
+                    <div class="time">3 days ago</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Preview uploaded image
+        document.getElementById('product-image').addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const preview = document.getElementById('preview-img');
+                    preview.src = e.target.result;
+                    preview.style.display = 'block';
+                    preview.previousElementSibling.style.display = 'none';
+                }
+                reader.readAsDataURL(file);
+            }
+        });
+    </script>
+</body>
+</html>

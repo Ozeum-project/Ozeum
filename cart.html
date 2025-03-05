@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Shopping Cart</title>
-    <link rel="stylesheet" href="cart.css">
+    <link rel="stylesheet" href="cart.css"> 
+    <script src="project.js"></script>
 </head> 
   <header class="header">
         <div class="logo">ozeum</div>
@@ -55,8 +56,8 @@
                         <div class="quantity-selector">
                             <input type="text" value="2" class="quantity-input">
                             <div class="quantity-arrows">
-                                <span class="arrow">▲</span>
-                                <span class="arrow">▼</span>
+                                <span class="arrowUp" onclick="increment()">▲</span>
+                                <span class="arrowDown" onclick="decrement()">▼</span>
                             </div>
                         </div>
                     </td>
@@ -141,6 +142,7 @@
 
             <button class="checkout-btn">PROCEED TO CHECKOUT</button>
         </div>
-    </div>
+    </div> 
+    
 </body>
 </html>

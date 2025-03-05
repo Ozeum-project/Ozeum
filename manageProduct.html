@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ozeum Admin - Manage Products</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f8f8f8;
+      }
+
+      header {
+        background-color: #000;
+        padding: 15px 30px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .logo {
+        color: white;
+        font-size: 24px;
+        font-weight: bold;
+      }
+
+      nav {
+        display: flex;
+      }
+
+      nav a {
+        color: white;
+        text-decoration: none;
+        margin-left: 20px;
+        font-size: 14px;
+      }
+
+      .breadcrumb {
+        background-color: rgba(0, 0, 0, 0.7);
+        color: white;
+        padding: 10px 30px;
+      }
+
+      .breadcrumb a {
+        color: white;
+        text-decoration: none;
+      }
+
+      .container {
+        max-width: 1200px;
+        margin: 20px auto;
+        padding: 0 15px;
+      }
+
+      .panel {
+        background: white;
+        padding: 20px;
+        border-radius: 5px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        margin-bottom: 20px;
+      }
+
+      h1 {
+        border-bottom: 3px solid #f0c14b;
+        padding-bottom: 10px;
+        margin-top: 0;
+      }
+
+      .search-actions {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 20px;
+      }
+
+      .search-box {
+        display: flex;
+        flex: 1;
+        max-width: 400px;
+      }
+
+      .search-box input {
+        flex: 1;
+        padding: 10px;
+        border: 1px solid #ddd;
+        border-radius: 5px 0 0 5px;
+      }
+
+      .search-box button {
+        padding: 10px 15px;
+        background-color: #f0c14b;
+        border: none;
+        border-radius: 0 5px 5px 0;
+        cursor: pointer;
+      }
+
+      .btn {
+        padding: 10px 20px;
+        background-color: #f0c14b;
+        color: #000;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-weight: bold;
+        text-decoration: none;
+        display: inline-block;
+      }
+
+      .product-count {
+        margin-bottom: 15px;
+        color: #555;
+      }
+
+      .products-table {
+        width: 100%;
+        border-collapse: collapse;
+      }
+
+      .products-table th {
+        text-align: left;
+        padding: 12px 10px;
+        border-bottom: 2px solid #f0c14b;
+      }
+
+      .products-table td {
+        padding: 12px 10px;
+        border-bottom: 1px solid #eee;
+      }
+
+      .products-table tr:hover {
+        background-color: #f9f9f9;
+      }
+
+      .product-image {
+        width: 80px;
+        height: 80px;
+        object-fit: cover;
+      }
+
+      .categories {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 5px;
+      }
+
+      .category-tag {
+        background-color: #eee;
+        padding: 3px 8px;
+        border-radius: 3px;
+        font-size: 12px;
+      }
+
+      .actions-cell {
+        white-space: nowrap;
+      }
+
+      .btn-small {
+        padding: 5px 10px;
+        font-size: 12px;
+      }
+
+      .btn-update {
+        background-color: #4285f4;
+        color: white;
+      }
+
+      .btn-delete {
+        background-color: #ea4335;
+        color: white;
+      }
+
+      .pagination {
+        display: flex;
+        justify-content: center;
+        margin-top: 20px;
+      }
+
+      .pagination a {
+        margin: 0 5px;
+        padding: 8px 12px;
+        border: 1px solid #ddd;
+        text-decoration: none;
+        color: #000;
+      }
+
+      .pagination a.active {
+        background-color: #f0c14b;
+        border-color: #f0c14b;
+      }
+
+      .sort-select {
+        padding: 10px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        margin-left: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="logo">ozeum</div>
+      <nav>
+        <a href="#">HOME</a>
+        <a href="#">EXHIBITIONS</a>
+        <a href="#">COLLECTIONS</a>
+        <a href="#">ABOUT US</a>
+        <a href="#">PAGES</a>
+        <a href="#">BLOG</a>
+        <a href="#">SHOP</a>
+        <a href="#">CONTACTS</a>
+        <a href="#">PROFILE</a>
+      </nav>
+    </header>
+
+    <div class="breadcrumb">
+      <a href="#">Home</a> / <a href="#">Admin</a> / Manage Products
+    </div>
+
+    <div class="container">
+      <div class="panel">
+        <h1>Manage Products</h1>
+
+        <div class="search-actions">
+          <div class="search-box">
+            <input type="text" placeholder="Search by product name..." />
+            <button>Search</button>
+          </div>
+
+          <div>
+            <select class="sort-select">
+              <option value="latest">Sort by latest</option>
+              <option value="oldest">Sort by oldest</option>
+              <option value="price-asc">Price: low to high</option>
+              <option value="price-desc">Price: high to low</option>
+              <option value="name-asc">Name: A-Z</option>
+              <option value="name-desc">Name: Z-A</option>
+            </select>
+            <a href="addProduct.html" class="btn">Add New Product</a>
+          </div>
+        </div>
+
+        <div class="product-count">Showing 1-8 of 24 results</div>
+
+        <table class="products-table">
+          <thead>
+            <tr>
+              <th>Image</th>
+              <th>Product</th>
+              <th>Categories</th>
+              <th>Regular Price</th>
+              <th>Sale Price</th>
+              <th>Stock</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>
+                <img
+                  src="/api/placeholder/80/80"
+                  alt="Woman Eating"
+                  class="product-image"
+                />
+              </td>
+              <td>Woman Eating</td>
+              <td>
+                <div class="categories">
+                  <span class="category-tag">ART</span>
+                  <span class="category-tag">BOOK</span>
+                  <span class="category-tag">EXHIBITION</span>
+                </div>
+              </td>
+              <td>$15.00</td>
+              <td>$12.00</td>
+              <td>15</td>
+              <td class="actions-cell">
+                <a
+                  href="updateProduct.html?id=1"
+                  class="btn btn-small btn-update"
+                  >Update</a
+                >
+                <button class="btn btn-small btn-delete">Delete</button>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <img
+                  src="/api/placeholder/80/80"
+                  alt="Boy with a Book"
+                  class="product-image"
+                />
+              </td>
+              <td>Boy with a Book</td>
+              <td>
+                <div class="categories">
+                  <span class="category-tag">ART</span>
+                  <span class="category-tag">BOOK</span>
+                </div>
+              </td>
+              <td>$15.00</td>
+              <td>$12.00</td>
+              <td>8</td>
+              <td class="actions-cell">
+                <a
+                  href="update-product.html?id=2"
+                  class="btn btn-small btn-update"
+                  >Update</a
+                >
+                <button class="btn btn-small btn-delete">Delete</button>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <img
+                  src="/api/placeholder/80/80"
+                  alt="Abstract Dreams"
+                  class="product-image"
+                />
+              </td>
+              <td>Abstract Dreams</td>
+              <td>
+                <div class="categories">
+                  <span class="category-tag">ART</span>
+                  <span class="category-tag">PAINTING</span>
+                </div>
+              </td>
+              <td>$18.00</td>
+              <td>$14.50</td>
+              <td>12</td>
+              <td class="actions-cell">
+                <a
+                  href="update-product.html?id=3"
+                  class="btn btn-small btn-update"
+                  >Update</a
+                >
+                <button class="btn btn-small btn-delete">Delete</button>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <img
+                  src="/api/placeholder/80/80"
+                  alt="Autumn Leaves"
+                  class="product-image"
+                />
+              </td>
+              <td>Autumn Leaves</td>
+              <td>
+                <div class="categories">
+                  <span class="category-tag">ART</span>
+                  <span class="category-tag">BOOK</span>
+                </div>
+              </td>
+              <td>$16.00</td>
+              <td>$13.00</td>
+              <td>20</td>
+              <td class="actions-cell">
+                <a
+                  href="update-product.html?id=4"
+                  class="btn btn-small btn-update"
+                  >Update</a
+                >
+                <button class="btn btn-small btn-delete">Delete</button>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <img
+                  src="/api/placeholder/80/80"
+                  alt="Silent Night"
+                  class="product-image"
+                />
+              </td>
+              <td>Silent Night</td>
+              <td>
+                <div class="categories">
+                  <span class="category-tag">ART</span>
+                  <span class="category-tag">BOOK</span>
+                  <span class="category-tag">EXHIBITION</span>
+                </div>
+              </td>
+              <td>$15.00</td>
+              <td>$12.00</td>
+              <td>7</td>
+              <td class="actions-cell">
+                <a
+                  href="update-product.html?id=5"
+                  class="btn btn-small btn-update"
+                  >Update</a
+                >
+                <button class="btn btn-small btn-delete">Delete</button>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <img
+                  src="/api/placeholder/80/80"
+                  alt="City Lights"
+                  class="product-image"
+                />
+              </td>
+              <td>City Lights</td>
+              <td>
+                <div class="categories">
+                  <span class="category-tag">ART</span>
+                  <span class="category-tag">EXHIBITION</span>
+                </div>
+              </td>
+              <td>$17.00</td>
+              <td>$13.50</td>
+              <td>10</td>
+              <td class="actions-cell">
+                <a
+                  href="update-product.html?id=6"
+                  class="btn btn-small btn-update"
+                  >Update</a
+                >
+                <button class="btn btn-small btn-delete">Delete</button>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <img
+                  src="/api/placeholder/80/80"
+                  alt="Dreamy Landscape"
+                  class="product-image"
+                />
+              </td>
+              <td>Dreamy Landscape</td>
+              <td>
+                <div class="categories">
+                  <span class="category-tag">ART</span>
+                  <span class="category-tag">BOOK</span>
+                </div>
+              </td>
+              <td>$14.00</td>
+              <td>$11.00</td>
+              <td>5</td>
+              <td class="actions-cell">
+                <a
+                  href="update-product.html?id=7"
+                  class="btn btn-small btn-update"
+                  >Update</a
+                >
+                <button class="btn btn-small btn-delete">Delete</button>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <img
+                  src="/api/placeholder/80/80"
+                  alt="Abstract Wonder"
+                  class="product-image"
+                />
+              </td>
+              <td>Abstract Wonder</td>
+              <td>
+                <div class="categories">
+                  <span class="category-tag">ART</span>
+                  <span class="category-tag">BOOK</span>
+                  <span class="category-tag">EXHIBITION</span>
+                </div>
+              </td>
+              <td>$19.00</td>
+              <td>$15.00</td>
+              <td>18</td>
+              <td class="actions-cell">
+                <a
+                  href="update-product.html?id=8"
+                  class="btn btn-small btn-update"
+                  >Update</a
+                >
+                <button class="btn btn-small btn-delete">Delete</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="pagination">
+          <a href="#" class="active">1</a>
+          <a href="#">2</a>
+          <a href="#">3</a>
+          <a href="#">Next →</a>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      // Delete confirmation
+      document.querySelectorAll(".btn-delete").forEach((button) => {
+        button.addEventListener("click", function () {
+          const productName =
+            this.closest("tr").querySelector("td:nth-child(2)").textContent;
+          if (confirm(`Are you sure you want to delete "${productName}"?`)) {
+            // Delete logic would go here
+            this.closest("tr").remove();
+            alert(`Product "${productName}" has been deleted.`);
+          }
+        });
+      });
+
+      // Search functionality
+      const searchBox = document.querySelector(".search-box input");
+      const searchButton = document.querySelector(".search-box button");
+
+      searchButton.addEventListener("click", function () {
+        const searchTerm = searchBox.value.toLowerCase();
+        const tableRows = document.querySelectorAll(".products-table tbody tr");
+
+        tableRows.forEach((row) => {
+          const productName = row
+            .querySelector("td:nth-child(2)")
+            .textContent.toLowerCase();
+          if (productName.includes(searchTerm)) {
+            row.style.display = "";
+          } else {
+            row.style.display = "none";
+          }
+        });
+      });
+
+      // Reset search when input is cleared
+      searchBox.addEventListener("input", function () {
+        if (this.value === "") {
+          document
+            .querySelectorAll(".products-table tbody tr")
+            .forEach((row) => {
+              row.style.display = "";
+            });
+        }
+      });
+    </script>
+  </body>
+</html>
