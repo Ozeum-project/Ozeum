@@ -124,14 +124,6 @@
                 <h2 class="card-title">Liste des Produits</h2>
                 <div class="action-buttons">
                     <input type="text" class="form-input" placeholder="Rechercher par nom de produit..." style="width: 250px; margin-right: 10px;">
-                    <select class="form-input" style="width: 200px; margin-right: 10px;">
-                        <option value="latest">Trier par plus récent</option>
-                        <option value="oldest">Trier par plus ancien</option>
-                        <option value="price-asc">Prix: croissant</option>
-                        <option value="price-desc">Prix: décroissant</option>
-                        <option value="name-asc">Nom: A-Z</option>
-                        <option value="name-desc">Nom: Z-A</option>
-                    </select>
                     <button class="btn btn-primary">
                         <a href="addProduct.php" style="text-decoration: none; color: white;">Ajouter un Nouveau Produit</a>
                         
@@ -213,12 +205,12 @@ foreach ($products as $productData) {
                    
                     
             <!-- Pagination -->
-            <div style="display: flex; justify-content: center; margin-top: 20px;">
+            <!-- <div style="display: flex; justify-content: center; margin-top: 20px;">
                 <a href="#" style="margin: 0 5px; padding: 8px 12px; border: 1px solid #ddd; text-decoration: none; color: #000; background-color: #f0c14b; border-color: #f0c14b;">1</a>
                 <a href="#" style="margin: 0 5px; padding: 8px 12px; border: 1px solid #ddd; text-decoration: none; color: #000;">2</a>
                 <a href="#" style="margin: 0 5px; padding: 8px 12px; border: 1px solid #ddd; text-decoration: none; color: #000;">3</a>
                 <a href="#" style="margin: 0 5px; padding: 8px 12px; border: 1px solid #ddd; text-decoration: none; color: #000;">Suivant →</a>
-            </div>
+            </div> -->
         </div>
     </div>
 

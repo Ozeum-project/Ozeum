@@ -251,7 +251,7 @@ if (
                 </div>
                 
                 <div class="action-buttons">
-                    <button type="button" class="btn btn-secondary">Annuler</button>
+                    <button type="button" class="btn btn-secondary" onclick="window.location.href='boutique.php'">Annuler</button>
                     <button type="submit" class="btn btn-primary">Ajouter le produit</button>
                 </div>
             </form>
