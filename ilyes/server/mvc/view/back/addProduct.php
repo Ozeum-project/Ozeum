@@ -15,7 +15,7 @@ if (
         $image = "default.jpg"; // par défaut
 
         // Gestion de l'image
-        $upload_dir = "C:/xampp/htdocs/ilyes/server/mvc/view/back/images/";
+        $upload_dir = "C:/xampp/htdocs/ozeum/ilyes/server/mvc/view/back/images/";
         if (!file_exists($upload_dir)) {
             mkdir($upload_dir, 0777, true);
         }

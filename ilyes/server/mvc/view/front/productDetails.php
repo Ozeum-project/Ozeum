@@ -43,7 +43,7 @@
         <div class="product-section">
             <?php
 // Include the controller at the top of the file
-include 'C:\xampp\htdocs\ilyes\server\mvc\controller\productController.php';
+include 'C:\xampp\htdocs\ozeum\ilyes\server\mvc\controller\productController.php';
 
 // Get the product ID from URL parameter
 $productId = isset($_GET['id']) ? (int)$_GET['id'] : 0;

@@ -34,7 +34,7 @@
             <div class="product-controls">
                 <div class="view-options">
                     <?php
-                    include 'C:\xampp\htdocs\ilyes\server\mvc\controller\productController.php';
+                    include 'C:\xampp\htdocs\ozeum\ilyes\server\mvc\controller\productController.php';
                     $productController = new ProductController();
                     
                     // Get filter parameters

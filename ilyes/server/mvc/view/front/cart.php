@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Shopping Cart</title>
-    <link rel="stylesheet" href="C:\xampp\htdocs\ilyes\stylefe.css">
+    <link rel="stylesheet" href="../stylefe.css">
     <link rel="stylesheet" href="cart.css"> 
     <script src="project.js"></script>
 </head> 

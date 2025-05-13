@@ -1,6 +1,6 @@
 <?php
-include 'C:\xampp\htdocs\ilyes\server\config.php';
-include 'C:\xampp\htdocs\ilyes\server\mvc\model\productModel.php';
+include 'C:\xampp\htdocs\ozeum\ilyes\server\config.php';
+include 'C:\xampp\htdocs\ozeum\ilyes\server\mvc\model\productModel.php';
 
 class ProductController {
     public function listProducts() {

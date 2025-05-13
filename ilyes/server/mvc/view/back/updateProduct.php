@@ -51,7 +51,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $img = $_POST['existing-image'] ?? ''; // Default to existing image
 
             if (isset($_FILES["product-image"]) && $_FILES["product-image"]["error"] === UPLOAD_ERR_OK) {
-                $target_dir = "C:/xampp/htdocs/ilyes/server/mvc/view/back/images/";
+                $target_dir = "C:/xampp/htdocs/ozeum/ilyes/server/mvc/view/back/images/";
                 
                 // Validate image
                 $check = getimagesize($_FILES["product-image"]["tmp_name"]);
@@ -242,9 +242,18 @@ $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
                         <?= htmlspecialchars($error) ?>
                     </div>
                 <?php elseif (!empty($success)): ?>
-                    <div class="success-message" style="color: green; padding: 10px; margin-bottom: 15px; border: 1px solid green;">
-                        <?= htmlspecialchars($success) ?>
-                    </div>
+                  
+                    <div class="success-message" style="color: green; padding: 10px; margin-bottom: 15px; border: 1px solid green; display: flex; justify-content: space-between; align-items: center;">
+    <span><?= htmlspecialchars($success) ?></span>
+    <button type="button" class="btn btn-secondary" onclick="window.location.href='boutique.php'" style="margin-left: 15px;">
+        Retour à la boutique
+    </button>
+</div>
+
+                    <!-- <div class="success-message" style="color: green; padding: 10px; margin-bottom: 15px; border: 1px solid green;">
+                        <?= htmlspecialchars($success) ?> 
+                        <button  type="button" class="btn btn-secondary" onclick="window.location.href='boutique.php'">Retour à la boutique</button>
+                    </div> -->
                 <?php endif; ?>
                 
                 <form method="POST" action="updateProduct.php?id=<?= $productId ?>" enctype="multipart/form-data" id="update-form">
@@ -292,7 +301,7 @@ $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
                         <div class="image-preview">
                             <?php if (!empty($product['image'])): ?>
                                 <img
-                               src= "/ilyes/server/mvc/view/back/images/<?= htmlspecialchars($product['image']) ?>"
+                               src= "/ozeum/ilyes/server/mvc/view/back/images/<?= htmlspecialchars($product['image']) ?>"
                                   alt="<?= htmlspecialchars($product['titre']) ?>" style="max-width: 200px; max-height: 200px;">
                             <?php else: ?>
                                 <p>No image available</p>

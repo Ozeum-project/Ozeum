@@ -148,7 +148,7 @@
                 </thead>
                 <tbody>
 <?php
-include 'C:\xampp\htdocs\ilyes\server\mvc\controller\productController.php';
+include 'C:\xampp\htdocs\ozeum\ilyes\server\mvc\controller\productController.php';
 $cartc = new ProductController();
 $products = $cartc->listProducts();
 
