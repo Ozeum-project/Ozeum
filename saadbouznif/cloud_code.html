@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Management Dashboard</title>
+    <link rel="stylesheet" href="users.css">
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+</head>
+<body>
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <div class="logo">Admin</div>
+        <ul class="nav-menu">
+            <li class="nav-item">
+                <a href="#" class="nav-link active">
+                    <i data-feather="users"></i>
+                    <span>User Management</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="#" class="nav-link">
+                    <i data-feather="shopping-cart"></i>
+                    <span>Orders</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="#" class="nav-link">
+                    <i data-feather="bell"></i>
+                    <span>Notifications</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="#" class="nav-link">
+                    <i data-feather="shield"></i>
+                    <span>Security</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <!-- Dashboard Header -->
+        <header class="dashboard-header">
+            <h1 class="page-title">User Management</h1>
+            <div class="user-menu">
+                <img src="/api/placeholder/40/40" alt="Admin">
+                <span>Admin User</span>
+            </div>
+        </header>
+
+        <!-- Stats Overview -->
+        <section class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-title">Total Users</div>
+                <div class="stat-value">1,254</div>
+                <div class="stat-change">+3.5% this month</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-title">Active Users</div>
+                <div class="stat-value">987</div>
+                <div class="stat-change">+2.1% this month</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-title">Banned Users</div>
+                <div class="stat-value">12</div>
+                <div class="stat-change" style="color: #e74c3c;">No change</div>
+            </div>
+        </section>
+
+        <!-- User Management Card -->
+        <div class="dashboard-card">
+            <div class="card-header">
+                <h2 class="card-title">User List</h2>
+                <div class="action-buttons">
+                    <input type="text" class="form-input" placeholder="Search users..." style="width: 250px; margin-right: 10px;">
+                    <button class="btn btn-primary">
+                        <i data-feather="search"></i> Search
+                    </button>
+                </div>
+            </div>
+
+            <!-- User Table -->
+            <table style="width: 100%; border-collapse: collapse;">
+                <thead>
+                    <tr style="background-color: #f5f5f5; border-bottom: 1px solid #ddd;">
+                        <th style="padding: 12px; text-align: left;">Name</th>
+                        <th style="padding: 12px; text-align: left;">Email</th>
+                        <th style="padding: 12px; text-align: left;">Status</th>
+                        <th style="padding: 12px; text-align: left;">Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="userTableBody">
+                    <!-- User rows will be dynamically populated by JavaScript -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- User Details Modal -->
+    <div id="userDetailsModal" class="modal" style="display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.5); align-items: center; justify-content: center;">
+        <div class="dashboard-card" style="width: 500px; max-height: 80%; overflow-y: auto;">
+            <div class="card-header">
+                <h2 class="card-title">User Details</h2>
+                <button onclick="closeUserModal()" class="btn btn-secondary">Close</button>
+            </div>
+            <div id="userDetailsContent">
+                <!-- User details will be dynamically populated -->
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Feather Icons Initialization
+        feather.replace();
+
+        // Sample User Data
+        const users = [
+            { 
+                id: 1, 
+                name: 'John Doe', 
+                email: 'john.doe@example.com', 
+                status: 'Active', 
+                registrationDate: '2023-01-15',
+                lastLogin: '2024-03-04',
+                orderCount: 5,
+                totalSpent: '$450.00'
+            },
+            { 
+                id: 2, 
+                name: 'Jane Smith', 
+                email: 'jane.smith@example.com', 
+                status: 'Inactive', 
+                registrationDate: '2023-05-22',
+                lastLogin: '2024-02-15',
+                orderCount: 2,
+                totalSpent: '$150.00'
+            }
+        ];
+
+        // Populate User Table
+        function populateUserTable() {
+            const tableBody = document.getElementById('userTableBody');
+            tableBody.innerHTML = users.map(user => `
+                <tr>
+                    <td style="padding: 12px;">${user.name}</td>
+                    <td style="padding: 12px;">${user.email}</td>
+                    <td style="padding: 12px;">
+                        <span style="
+                            background-color: ${user.status === 'Active' ? '#27ae60' : '#e74c3c'}; 
+                            color: white; 
+                            padding: 4px 8px; 
+                            border-radius: 4px;
+                            font-size: 12px;
+                        ">
+                            ${user.status}
+                        </span>
+                    </td>
+                    <td style="padding: 12px;">
+                        <button onclick="showUserDetails(${user.id})" class="btn btn-secondary" style="margin-right: 5px;">
+                            <i data-feather="eye"></i>
+                        </button>
+                        <button class="btn btn-secondary">
+                            <i data-feather="edit"></i>
+                        </button>
+                    </td>
+                </tr>
+            `).join('');
+            feather.replace();
+        }
+
+        // Show User Details Modal
+        function showUserDetails(userId) {
+            const user = users.find(u => u.id === userId);
+            const modalContent = document.getElementById('userDetailsContent');
+            modalContent.innerHTML = `
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label class="form-label">Name</label>
+                        <input class="form-input" value="${user.name}" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Email</label>
+                        <input class="form-input" value="${user.email}" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Registration Date</label>
+                        <input class="form-input" value="${user.registrationDate}" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Last Login</label>
+                        <input class="form-input" value="${user.lastLogin}" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Order Count</label>
+                        <input class="form-input" value="${user.orderCount}" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Total Spent</label>
+                        <input class="form-input" value="${user.totalSpent}" readonly>
+                    </div>
+                </div>
+                <div class="action-buttons">
+                    <button class="btn btn-secondary" onclick="toggleUserStatus(${user.id})">
+                        ${user.status === 'Active' ? 'Deactivate' : 'Activate'} Account
+                    </button>
+                    <button class="btn btn-primary">
+                        Reset Password
+                    </button>
+                </div>
+            `;
+            document.getElementById('userDetailsModal').style.display = 'flex';
+        }
+
+        // Close User Details Modal
+        function closeUserModal() {
+            document.getElementById('userDetailsModal').style.display = 'none';
+        }
+
+        // Toggle User Status
+        function toggleUserStatus(userId) {
+            const user = users.find(u => u.id === userId);
+            user.status = user.status === 'Active' ? 'Inactive' : 'Active';
+            populateUserTable();
+            closeUserModal();
+        }
+
+        // Initial Population
+        populateUserTable();
+    </script>
+</body>
+</html>
