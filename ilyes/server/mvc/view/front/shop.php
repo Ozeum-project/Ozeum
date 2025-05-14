@@ -1,3 +1,30 @@
+<?php
+session_start();
+include 'C:\xampp\htdocs\ozeum\ilyes\server\mvc\controller\cartController.php';
+//include 'C:\xampp\htdocs\ozeum\ilyes\server\mvc\model\cartModel.php';
+
+if (isset($_POST['add_to_cart']) && isset($_SESSION['user_email'])) {
+    $user_email = $_SESSION['user_email'];
+    $product_id = intval($_POST['product_id']);
+    $quantity = isset($_POST['quantity']) ? intval($_POST['quantity']) : 1;
+
+    $cartItem = new CartItem(0, $user_email, $product_id, $quantity);
+    $cartController = new cartController();
+    $cartController->addToCart($cartItem);
+
+    // Optional: Redirect to avoid form resubmission
+    header("Location: shop.php?added=1");
+    exit();
+}   
+
+// get cart data
+$cartItems = [];
+if (isset($_SESSION['user_email'])) {
+    $cartController = new cartController();
+    $cartItems = $cartController->getCartWithProducts($_SESSION['user_email']);
+}
+// ...existing code...
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -21,7 +48,7 @@
             <a href="../../ilyas/front/shop.html">BOUTIQUE</a>
             <a href="../../nour khadouma/formajou.html">AVIS</a>
             <a href="../../ghofrane/accceuil.html">GALLERIE</a>
-            <a href="#">PROFILE</a>
+            <a href="\ozeum\saadbouznif\mvc\view\front\profileInfo.php">PROFILE</a>
         </nav>
     </header>
     <div class="hero">
@@ -33,8 +60,18 @@
         <section class="product-section">
             <div class="product-controls">
                 <div class="view-options">
-                    <?php
-                    include 'C:\xampp\htdocs\ozeum\ilyes\server\mvc\controller\productController.php';
+                    <?php  
+//                     session_start();
+
+// if (isset($_SESSION['user_email'])) {
+//     echo "Utilisateur connecté : " . htmlspecialchars($_SESSION['user_email']);
+// } else {
+//     echo "Aucun utilisateur connecté.";
+// }
+                    include 'C:\xampp\htdocs\ozeum\ilyes\server\mvc\controller\productController.php'; 
+                   
+// At the top of your PHP file
+
                     $productController = new ProductController();
                     
                     // Get filter parameters
@@ -80,10 +117,15 @@
                     <span class="discount-badge">-20%</span>
                     <div class="product-image-container">
                         <img  src="../back/images/<?= htmlspecialchars($productData["image"]) ?>" alt="<?= $productData['titre'] ?>" class="product-image">
-                        <div class="product-buttons">
-                            <!-- <button class="view-details-btn" onclick="window.location.href='product-details.php?id=<?= $productData['id'] ?>'">VIEW DETAILS</button> -->
+                        <!-- <div class="product-buttons">
                             <button class="add-to-cart-btn">ADD TO CART</button>
-                        </div>
+                        </div> --> 
+                        <div class="product-buttons">
+    <form method="post" action="shop.php" style="display:inline;">
+    <input type="hidden" name="product_id" value="<?= $productData['id'] ?>">
+        <button type="submit" name="add_to_cart" class="add-to-cart-btn">ADD TO CART</button>
+    </form>
+</div>
                     </div>
                     <div class="product-info">
                         <div class="product-categories"><?= $productData['category'] ?></div>
@@ -112,22 +154,22 @@
         
         <aside class="sidebar">
             <div class="sidebar-section">
-                <h3 class="sidebar-title">Cart</h3>
-                <div class="cart-item">
-                    <img src="https://i.pinimg.com/originals/58/88/da/5888da528749981d1bc5616a4aaf46c1.jpg" alt="Boy with a Book">
-                    <div>
-                        <p>Boy with a Book</p>
-                        <p>2 × $12.00</p>
-                    </div>
-                </div> 
-                <div class="cart-item">
-                    <img src="https://i.pinimg.com/originals/58/88/da/5888da528749981d1bc5616a4aaf46c1.jpg" alt="Boy with a Book">
-                    <div>
-                        <p>Boy with a Book</p>
-                        <p>2 × $12.00</p>
-                    </div>
-                </div> 
-                <button type="submit" class="filter-btn" onclick="window.location.href='cart.php'" >VIEW CART</button> 
+            <h3 class="sidebar-title">Cart</h3>
+    <?php if (!empty($cartItems)): ?>
+        <?php foreach ($cartItems as $item): ?>
+            <div class="cart-item">
+                <img src="../back/images/<?= htmlspecialchars($item['image']) ?>" alt="<?= htmlspecialchars($item['titre']) ?>">
+                <div>
+                    <p><?= htmlspecialchars($item['titre']) ?></p>
+                    <p><?= $item['quantity'] ?> × $<?= number_format($item['prix_promotion'], 2) ?></p>
+                </div>
+            </div>
+        <?php endforeach; ?>
+        <button type="button" class="filter-btn" onclick="window.location.href='cart.php'">VIEW CART</button>
+    <?php else: ?>
+        <p style="color:#888;">Your cart is empty.</p>
+    <?php endif; ?>
+                <!-- <button type="submit" class="filter-btn" onclick="window.location.href='cart.php'" >VIEW CART</button>  -->
                 </div>
                 <div class="sidebar-section">
                     <h3 class="sidebar-title">Search</h3>

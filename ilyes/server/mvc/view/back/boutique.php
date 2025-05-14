@@ -1,3 +1,20 @@
+<?php
+include_once 'C:\xampp\htdocs\ozeum\ilyes\server\mvc\controller\couponsController.php';
+//getCoupon !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+$couponsController = new CouponsController();
+$coupons = $couponsController->getAllCoupons(); 
+// addCoupon !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! 
+
+if (isset($_POST['coupon']) && isset($_POST['promotion'])) {
+    $couponsController = new CouponsController();
+    $couponsController->addCoupon($_POST['coupon'], $_POST['promotion']);
+    $_SESSION['coupon_added'] = true;
+    // Optional: Redirect to avoid resubmission
+    header("Location: boutique.php");
+    exit();
+}
+
+?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -6,7 +23,13 @@
     <title>Ozeum Admin - Gérer les Produits</title>
     <link rel="stylesheet" href="../../../../users.css">
 </head>
-<body>
+<body> 
+<?php if (!empty($_SESSION['coupon_added'])): ?>
+    <div style="background:#27ae60; color:#fff; padding:16px; border-radius:6px; margin:24px auto 0 auto; max-width:500px; text-align:center; font-size:1.1rem;">
+        Coupon ajouté avec succès !
+    </div>
+    <?php unset($_SESSION['coupon_added']); ?>
+<?php endif; ?>
     <!-- Sidebar -->
     <aside class="sidebar">
         <div class="logo">ozeum</div>
@@ -82,7 +105,7 @@
     
         </ul>
     </aside>
-
+   
     <!-- Main Content -->
     <div class="main-content">
         <!-- Dashboard Header -->
@@ -117,7 +140,51 @@
                 <div class="stat-change" style="color: #27ae60;">+8.4% cette semaine</div>
             </div>
         </section>
-
+        <?php if (!empty($coupons)): ?>
+<div class="coupons-list" style="margin-bottom: 24px; box-shadow: 0 4px 16px rgba(0,0,0,0.08), 0 1.5px 4px rgba(0,0,0,0.06); border-radius: 10px; background: #fff; padding: 32px 28px 24px 28px;">    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+        <h3 style="margin:0;">Available Coupons</h3>
+        <button class="btn btn-primary" type="button" onclick="openCouponModal()">
+          Ajouter un Coupon
+      </button>
+    </div>
+    <table style="width:100%; border-collapse:collapse; background:#fff; border-radius:8px; overflow:hidden;">
+        <thead style="background:#f8f8f8;">
+            <tr>
+                <th style="padding:12px; border-bottom:1px solid #eee; text-align:left;">Code</th>
+                <th style="padding:12px; border-bottom:1px solid #eee; text-align:left;">Promotion (%)</th>
+                <th style="padding:12px; border-bottom:1px solid #eee; text-align:right;">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php foreach ($coupons as $coupon): ?>
+                <tr style="border-bottom:1px solid #f0f0f0;">
+                    <td style="padding:12px;"><?= htmlspecialchars($coupon->getCoupon()) ?></td>
+                    <td style="padding:12px; color:#0078d7;"><?= intval($coupon->getPromotion()) ?>%</td>
+                    <td style="padding:12px; text-align:right;">
+                        <a href="deleteCoupon.php?id=<?= urlencode($coupon->getId()) ?>" onclick="return confirm('Supprimer ce coupon ?');">
+                            <button class="btn btn-secondary2" style="background-color: #ea4335; color: white; padding:4px 10px; border-radius:4px;">
+                                Supprimer
+                            </button>
+                        </a>
+                    </td>
+                </tr>
+            <?php endforeach; ?>
+        </tbody>
+    </table>
+</div>
+<?php else: ?>
+    <div class="coupons-list" style="margin-bottom: 24px; box-shadow: 0 4px 16px rgba(0,0,0,0.08), 0 1.5px 4px rgba(0,0,0,0.06); border-radius: 10px; background: #fff; padding: 32px 28px 24px 28px;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+            <h3 style="margin:0;">Available Coupons</h3>
+            <button class="btn btn-primary" type="button" onclick="openCouponModal()">
+                Ajouter un Coupon
+            </button>
+        </div>
+        <div style="padding: 24px; text-align: center; color: #888;">
+            Aucun coupon disponible pour le moment.
+        </div>
+    </div>
+<?php endif; ?>
         <!-- Products Management Card -->
         <div class="dashboard-card">
             <div class="card-header">
@@ -143,7 +210,7 @@
                         <th style="padding: 12px; text-align: left;">Prix Normal</th>
                         <th style="padding: 12px; text-align: left;">Prix Promo</th>
                         <th style="padding: 12px; text-align: left;">Stock</th>
-                        <th style="padding: 12px; text-align: left;">Actions</th>
+                        <th style="padding: 12px; text-align: right;;">Actions</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -169,48 +236,42 @@ foreach ($products as $productData) {
         <td style="padding: 12px;"><?= htmlspecialchars($productData["prix_normale"]) ?></td>
         <td style="padding: 12px;"><?= htmlspecialchars($productData["prix_promotion"]) ?></td>
         <td style="padding: 12px;"><?= htmlspecialchars($productData["quantite"]) ?></td>
-        <td style="padding: 12px;">
+        <td style="padding: 12px; text-align: right;">
             <!-- Bouton Modifier (à compléter selon ton projet) -->
-            <a  onclick="window.location.href='updateProduct.php?id=<?= $productData['id'] ?>'" >
-             
-            <button class="btn btn-secondary" style="margin-right: 5px; background-color: #4285f4; color: white;">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
-                    <path d="M20 14.66V20a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h5.34"></path>
-                    <polygon points="18 2 22 6 12 16 8 16 8 12 18 2"></polygon>
-                </svg>
-            </button>
-            </a>
-
-            <!-- Bouton Supprimer -->
-            <a href="deleteProduct.php?id=<?= urlencode($productData['id']) ?>" >
-                <button class="btn btn-secondary" style="background-color: #ea4335; color: white;">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
-                        <polyline points="3 6 5 6 21 6"></polyline>
-                        <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
-                        <line x1="10" y1="11" x2="10" y2="17"></line>
-                        <line x1="14" y1="11" x2="14" y2="17"></line>
-                    </svg>
-                </button>
-            </a>
+           <a href="updateProduct.php?id=<?= urlencode($productData['id']) ?>">
+        <button class="btn btn-secondary" style="margin-right: 5px; background-color: #4285f4; color: white;">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+                <path d="M20 14.66V20a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h5.34"></path>
+                <polygon points="18 2 22 6 12 16 8 16 8 12 18 2"></polygon>
+            </svg>
+        </button>
+    </a>
+    <!-- Bouton Supprimer -->
+    <a href="deleteProduct.php?id=<?= urlencode($productData['id']) ?>">
+        <button class="btn btn-secondary" style="background-color: #ea4335; color: white;">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+                <polyline points="3 6 5 6 21 6"></polyline>
+                <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+                <line x1="10" y1="11" x2="10" y2="17"></line>
+                <line x1="14" y1="11" x2="14" y2="17"></line>
+            </svg>
+        </button>
+    </a>
         </td>
     </tr>
 <?php
 }
 ?>
-</tbody>
+</tbody> 
+
+
 
 </table>
 
 
                    
                     
-            <!-- Pagination -->
-            <!-- <div style="display: flex; justify-content: center; margin-top: 20px;">
-                <a href="#" style="margin: 0 5px; padding: 8px 12px; border: 1px solid #ddd; text-decoration: none; color: #000; background-color: #f0c14b; border-color: #f0c14b;">1</a>
-                <a href="#" style="margin: 0 5px; padding: 8px 12px; border: 1px solid #ddd; text-decoration: none; color: #000;">2</a>
-                <a href="#" style="margin: 0 5px; padding: 8px 12px; border: 1px solid #ddd; text-decoration: none; color: #000;">3</a>
-                <a href="#" style="margin: 0 5px; padding: 8px 12px; border: 1px solid #ddd; text-decoration: none; color: #000;">Suivant →</a>
-            </div> -->
+           
         </div>
     </div>
 
@@ -272,7 +333,39 @@ foreach ($products as $productData) {
             
             const tbody = document.querySelector("tbody");
             tableRows.forEach(row => tbody.appendChild(row));
-        });
+        });  
+
+        function openCouponModal() {
+    document.getElementById('addCouponModal').style.display = 'block';
+}
+function closeCouponModal() {
+    document.getElementById('addCouponModal').style.display = 'none';
+}
+window.onclick = function(event) {
+    var modal = document.getElementById('addCouponModal');
+    if (event.target == modal) {
+        modal.style.display = "none";
+    }
+}
     </script>
-</body>
+</body> 
+
+<!-- Add Coupon Modal -->
+<div id="addCouponModal" class="modal" style="display:none; position:fixed; z-index:1000; left:0; top:0; width:100%; height:100%; overflow:auto; background:rgba(0,0,0,0.4);">
+  <div style="background:#fff; margin:8% auto; padding:32px 24px; border-radius:8px; width:350px; position:relative;">
+    <span onclick="closeCouponModal()" style="position:absolute; top:12px; right:18px; font-size:24px; cursor:pointer;">&times;</span>
+    <h2 style="margin-top:0;">Ajouter un Coupon</h2>
+    <form method="post" >
+      <div style="margin-bottom:16px;">
+        <label for="coupon_code">Code du coupon</label>
+        <input type="text" id="coupon_code" name="coupon" required style="width:100%; padding:8px; margin-top:4px;">
+      </div>
+      <div style="margin-bottom:16px;">
+        <label for="promotion">Promotion (%)</label>
+        <input type="number" id="promotion" name="promotion" min="1" max="100" required style="width:100%; padding:8px; margin-top:4px;">
+      </div>
+      <button type="submit" class="btn btn-primary" style="width:100%;">Ajouter</button>
+    </form>
+  </div>
+</div>
 </html>

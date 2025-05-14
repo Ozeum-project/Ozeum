@@ -1,5 +1,5 @@
 <?php
-include 'C:\xampp\htdocs\ozeum\ilyes\server\config.php';
+include_once  'C:\xampp\htdocs\ozeum\ilyes\server\config.php';
 include 'C:\xampp\htdocs\ozeum\ilyes\server\mvc\model\productModel.php';
 
 class ProductController {
@@ -46,7 +46,7 @@ class ProductController {
                 'category' => $dep->getCategory(),
             ]); 
             return true;
-        } catch (Exception $e) {
+        } catch (Exception $e) { 
             echo 'Error: ' . $e->getMessage();
             return false;
         }

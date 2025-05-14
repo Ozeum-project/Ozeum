@@ -1,4 +1,5 @@
-<?php
+<?php 
+session_start();
 include '../../controller/productController.php';
 $error = "";
 $productController = new ProductController();
@@ -46,10 +47,15 @@ if (
                 $image,
                 $_POST["category"]
             );
-
-            $productController->addProduct($product);
-            header("Location: boutique.php");
-            exit();
+            $existing = $productController->getProductById(intval($_POST["product-id"]));
+            if ($existing) {
+                $error = "Un produit avec cet ID existe déjà.";
+            } else {
+            $productController->addProduct($product); 
+            $_SESSION['product_added'] = true;
+             header("Location: boutiqye.php");
+            exit(); 
+            }
         }
     } else {
         $error = "Tous les champs sont requis.";
@@ -69,7 +75,8 @@ if (
        <link rel="stylesheet" href="addProduct.css">
 
 </head>
-<body>
+<body>   
+
     <!-- Sidebar -->
     <aside class="sidebar">
         <div class="logo">ozeum</div>
