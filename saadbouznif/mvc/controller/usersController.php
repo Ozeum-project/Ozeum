@@ -42,7 +42,7 @@ class UserController {
 
     public function getUserByEmail(string $email): ?array 
     {
-        $sql = "SELECT id, name, lastName, email, password, image, adresse 
+        $sql = "SELECT  name, lastName, email, password, image, adresse 
                 FROM users 
                 WHERE email = :email 
                 LIMIT 1";
@@ -53,13 +53,11 @@ class UserController {
             $stmt = $db->prepare($sql);
             $stmt->bindValue(':email', $email, PDO::PARAM_STR);
             $stmt->execute();
-            
             $user = $stmt->fetch(PDO::FETCH_ASSOC);
             return $user ?: null;
-            
         } catch (PDOException $e) {
-            error_log("Database error in getUserByEmail: " . $e->getMessage());
-            throw new PDOException("Error accessing user data");
+           // error_log("Database error in getUserByEmail: " . $e->getMessage());
+            throw new Exception("Error accessing user data". $e->getMessage());
         }
     }
     public function listUsers() {
@@ -74,8 +72,16 @@ class UserController {
         }
     } 
 
-    public function deleteUser($id) {
-        $sql = "DELETE FROM users WHERE id = :id";
+
+    public function deleteUserByEmail($email) {
+        $db = config::getConnexion();
+        $sql = "DELETE FROM users WHERE email = :email";
+        $stmt = $db->prepare($sql);
+        $stmt->bindValue(':email', $email, PDO::PARAM_STR);
+        $stmt->execute();
+    }
+    public function deleteUser($email) {
+        $sql = "DELETE FROM users WHERE email = :email";
         $db = config::getConnexion();
         $req = $db->prepare($sql);
         $req->bindValue(':id', $id);

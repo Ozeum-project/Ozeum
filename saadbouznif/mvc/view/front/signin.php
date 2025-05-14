@@ -1,9 +1,11 @@
-<?php
+<?php 
+
 session_start();
 include 'C:\xampp\htdocs\ozeum\saadbouznif\mvc\controller\usersController.php';
-
+// ...existing code...
 $error = "";
 $userController = new UserController();
+
 
 // Check for registration success message
 $registrationSuccess = isset($_SESSION['registration_success']) ? $_SESSION['registration_success'] : false;
@@ -20,7 +22,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['email'], $_POST['pass
             // Secure password verification using password_verify
             if (password_verify($password, $user['password'])) {
                 // Successful login
-                $_SESSION['user_id'] = $user['id'];
+               
                 $_SESSION['user_email'] = $user['email'];
                 $_SESSION['user_name'] = $user['name'];
                 $_SESSION['user_lastName'] = $user['lastName'];
@@ -28,7 +30,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['email'], $_POST['pass
                 // Regenerate session ID to prevent session fixation
                 session_regenerate_id(true);
                 
-                header("Location: dashboard.php");
+                header("location: /ozeum/ilyes/server/mvc/view/front/shop.php");
                 exit();
             } else {
                 $error = "Email ou mot de passe incorrect.";
@@ -37,8 +39,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['email'], $_POST['pass
             $error = "Email ou mot de passe incorrect.";
         }
     } catch (Exception $e) {
-        error_log("Login error: " . $e->getMessage());
-        $error = "Une erreur s'est produite lors de la connexion.";
+        // error_log("Login error: " . $e->getMessage());
+        // $error = "Une erreur s'est produite lors de la connexion."; 
+        $error = "Erreur technique: " . $e->getMessage();
     }
 }
 ?>

@@ -204,7 +204,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <label for="password" class="form-label">Mot de Passe</label>
         <input type="password" id="password" name="password" class="form-input" 
                placeholder="Entrez votre mot de passe" required>
-    </div>
+    </div> 
+    <div class="form-group">
+    <label for="confirm_password" class="form-label">Confirmez le mot de passe</label>
+    <input type="password" id="confirm_password" name="confirm_password" class="form-input" 
+           placeholder="Confirmez votre mot de passe" required>
+</div>
     
     <button type="submit" class="submit-button">S'inscrire</button>
     
@@ -217,13 +222,68 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </div>
 
     <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const registerForm = document.getElementById('register-form');
-        registerForm.addEventListener('submit', function(e) {
-            // Remove preventDefault() to allow form submission
-            // Only keep client-side validation if needed
-        });
+document.addEventListener('DOMContentLoaded', function() {
+    const registerForm = document.getElementById('register-form');
+    if (!registerForm) return;
+
+    registerForm.addEventListener('submit', function(e) {
+        const name = registerForm.querySelector('#name');
+        const lastName = registerForm.querySelector('#lastName');
+        const email = registerForm.querySelector('#email');
+        const password = registerForm.querySelector('#password');
+        const confirmPassword = registerForm.querySelector('#confirm_password');
+
+        // Name validation
+        if (name.value.trim().length < 2) {
+            e.preventDefault();
+            alert('Le nom doit contenir au moins 2 caractères.');
+            name.focus();
+            return;
+        }
+
+        // Last name validation
+        if (lastName.value.trim().length < 2) {
+            e.preventDefault();
+            alert('Le prénom doit contenir au moins 2 caractères.');
+            lastName.focus();
+            return;
+        }
+
+        // Email validation
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(email.value)) {
+            e.preventDefault();
+            alert('Veuillez entrer une adresse email valide.');
+            email.focus();
+            return;
+        }
+
+        // Password length
+        if (password.value.length < 8) {
+            e.preventDefault();
+            alert('Le mot de passe doit contenir au moins 8 caractères.');
+            password.focus();
+            return;
+        }
+
+        // Password complexity (at least one letter and one number)
+        const regex = /^(?=.*[A-Za-z])(?=.*\d).+$/;
+        if (!regex.test(password.value)) {
+            e.preventDefault();
+            alert('Le mot de passe doit contenir au moins une lettre et un chiffre.');
+            password.focus();
+            return;
+        }
+
+        // Password confirmation
+        if (password.value !== confirmPassword.value) {
+            e.preventDefault();
+            alert('Les mots de passe ne correspondent pas.');
+            confirmPassword.focus();
+            return;
+        }
     });
+});
 </script>
 </body>
 </html>

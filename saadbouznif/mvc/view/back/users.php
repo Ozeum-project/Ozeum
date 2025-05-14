@@ -131,8 +131,9 @@
                 <thead>
                     <tr style="background-color: #f5f5f5; border-bottom: 1px solid #ddd;">
                         <th style="padding: 12px; text-align: left;">Nom</th>
+                        <th style="padding: 12px; text-align: left;">Prenom</th>
                         <th style="padding: 12px; text-align: left;">Email</th>
-                        <th style="padding: 12px; text-align: left;">Status</th>
+                        <th style="padding: 12px; text-align: left;">adresse</th>
                         <th style="padding: 12px; text-align: left;">Actions</th>
                     </tr>
                 </thead>
@@ -141,20 +142,21 @@
                 </tbody>-->
             </table>
             <table style="width: 100%; border-collapse: collapse;">
+            <?php
+include 'C:\xampp\htdocs\ozeum\saadbouznif\mvc\controller\usersController.php';
+$userc = new UserController();
+$users = $userc->listUsers();
+
+foreach ($users as $userData) {
+?>
                 <tr>
-                    <td style="padding: 12px;">John Doe</td>
-                    <td style="padding: 12px;">johndoe@example.com</td>
-                    <td style="padding: 12px;">
-                        <span style="
-                            background-color: #27ae60; /* Active status color */
-                            color: white; 
-                            padding: 4px 8px; 
-                            border-radius: 4px;
-                            font-size: 12px;
-                        ">
-                            Active
-                        </span>
-                    </td>
+                    <td style="padding: 12px;"><?= htmlspecialchars($userData["name"]) ?>    </td>
+                    <td style="padding: 12px;"> <?= htmlspecialchars($userData["lastName"]) ?> </td>
+                    <td style="padding: 12px;">   <?= htmlspecialchars($userData["email"]) ?></td>
+                    <td style="padding: 12px;">   <?= htmlspecialchars($userData["adresse"]) ?></td>
+
+                   
+                
                     <td style="padding: 12px;">
                         <button  class="btn btn-secondary" style="margin-right: 5px;">
                             <!-- https://feathericons.dev/?search=eye&iconset=feather -->
@@ -163,7 +165,7 @@
                             <circle cx="12" cy="12" r="3" />
                             </svg>
                         </button>
-                        
+                        <a href="deleteUsers.php?email=<?= urlencode($userData['email']) ?>">
                         <button class="btn btn-secondary">
                             <!-- https://feathericons.dev/?search=delete&iconset=feather -->
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" class="main-grid-item-icon" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
@@ -172,43 +174,14 @@
                                 <line x1="12" x2="18" y1="9" y2="15" />
                                 </svg>
   
-                        </button>
+                        </button> 
+                        </a>
                     </td>
                 </tr>
                 
-                <tr>
-                    <td style="padding: 12px;">Jane Smith</td>
-                    <td style="padding: 12px;">janesmith@example.com</td>
-                    <td style="padding: 12px;">
-                        <span style="
-                            background-color: #e74c3c; /* Inactive status color */
-                            color: white; 
-                            padding: 4px 8px; 
-                            border-radius: 4px;
-                            font-size: 12px;
-                        ">
-                            Inactive
-                        </span>
-                    </td>
-                    <td style="padding: 12px;">
-                        <button  class="btn btn-secondary" style="margin-right: 5px;">
-                            <!-- https://feathericons.dev/?search=eye&iconset=feather -->
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" class="main-grid-item-icon" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
-                            <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
-                            <circle cx="12" cy="12" r="3" />
-                            </svg>
-                        </button>
-                        <button class="btn btn-secondary">
-                            <!-- https://feathericons.dev/?search=delete&iconset=feather -->
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" class="main-grid-item-icon" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
-                                <path d="M21 4H8l-7 8 7 8h13a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2z" />
-                                <line x1="18" x2="12" y1="9" y2="15" />
-                                <line x1="12" x2="18" y1="9" y2="15" />
-                                </svg>
-  
-                        </button>
-                    </td>
-                </tr>
+                <?php
+}
+?>
                 
             </table>
         </div>
