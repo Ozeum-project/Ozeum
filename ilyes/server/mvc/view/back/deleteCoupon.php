@@ -1,6 +1,6 @@
 
 <?php
-include_once 'C:\xampp\htdocs\ozeum\ilyes\server\config.php';
+include_once 'C:\xampp\htdocs\ozeum\config.php';
 
 if (isset($_GET['id'])) {
     $db = config::getConnexion();

@@ -11,7 +11,7 @@ if (isset($_POST['add_to_cart']) && isset($_SESSION['user_email'])) {
     $cartItem = new CartItem(0, $user_email, $product_id, $quantity);
     $cartController = new cartController();
     $cartController->addToCart($cartItem);
-
+  
     // Optional: Redirect to avoid form resubmission
     header("Location: shop.php?added=1");
     exit();
@@ -43,18 +43,22 @@ if (isset($_SESSION['user_email'])) {
     <header class="header">
         <div class="logo">ozeum</div>
         <nav class="nav">
-            <a href="\ozeum\pro\view\front\index.php">ACCUEIL</a>
-            <a href="#">BLOG</a>
+        <a href="\ozeum\pro\view\front\index.php">ACCUEIL</a>
+            <a href="\ozeum\adel\view\frontoffice\blogs.php">BLOG</a>
             <a href="\ozeum\ilyes\server\mvc\view\front\shop.php">BOUTIQUE</a>
-            <a href="#">AVIS</a>
-            <a href="#">GALLERIE</a>
-            <a href="#" class="nav-item" id="profile-link">PROFILE</a>
+            <a href="\ozeum\nour\view\addreclamation.php">AVIS</a>
+            <a href="\ozeum\ghofrane\view\frontoffice\acceuil.php">GALLERIE</a>
+            <?php if (isset($_SESSION['user_email'])): ?>
+                <a href="#" class="nav-item" id="profile-link">PROFILE</a>
+            <?php else: ?>
+              <a href="/ozeum/saadbouznif/mvc/view/front/signin.php" class="nav-item">LOGIN</a>
+            <?php endif; ?>
         </nav>
         <div class="dropdown-menu" id="profile-dropdown">
             <a href="\ozeum\saadbouznif\mvc\view\front\profileInfo.php" class="dropdown-item"><i>👤</i> Mon Compte</a>
             <a href="#" class="dropdown-item"><i>🚪</i> Déconnecter</a>
         </div>
-    </header>
+    </header> 
 
     <div class="hero">
         <div class="keyboard">
@@ -345,27 +349,27 @@ if (isset($_SESSION['user_email'])) {
         }
     }); 
     document.addEventListener('DOMContentLoaded', function() {
-            const profileLink = document.getElementById('profile-link');
-            const profileDropdown = document.getElementById('profile-dropdown');
-            
-            profileLink.addEventListener('click', function(e) {
-                e.preventDefault();
-                e.stopPropagation(); // Prevent event from bubbling up
-                profileDropdown.classList.toggle('active');
-            });
-            
-            // Close dropdown when clicking outside
-            document.addEventListener('click', function(e) {
-                if (!profileLink.contains(e.target) && !profileDropdown.contains(e.target)) {
-                    profileDropdown.classList.remove('active');
-                }
-            });
-            
-            // Prevent dropdown from closing when clicking inside it
-            profileDropdown.addEventListener('click', function(e) {
-                e.stopPropagation();
-            });
+        const profileLink = document.getElementById('profile-link');
+        const profileDropdown = document.getElementById('profile-dropdown');
+        
+        profileLink.addEventListener('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation(); // Prevent event from bubbling up
+            profileDropdown.classList.toggle('active');
         });
+        
+        // Close dropdown when clicking outside
+        document.addEventListener('click', function(e) {
+            if (!profileLink.contains(e.target) && !profileDropdown.contains(e.target)) {
+                profileDropdown.classList.remove('active');
+            }
+        });
+        
+        // Prevent dropdown from closing when clicking inside it
+        profileDropdown.addEventListener('click', function(e) {
+            e.stopPropagation();
+        });
+    });
     </script>
 </body>
 </html>

@@ -179,7 +179,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         <h2 class="form-title">Inscription</h2>
         
-        <form id="register-form" method="POST" action="register.php">
+        <!-- <form id="register-form" method="POST" action="register.php"> -->
         <form id="register-form" action="register.php" method="POST">
     <input type="hidden" name="user-id" value="<?php echo uniqid(); ?>">
     

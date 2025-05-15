@@ -34,11 +34,11 @@ $events = $eventController->listEvents();
   <header class="header">
         <div class="logo">ozeum</div>
         <nav class="nav">
-            <a href="../ayoub/index.html">ACCUEIL</a>
-            <a href="#">BLOG</a>
+            <a href="\ozeum\pro\view\front\index.php">ACCUEIL</a>
+            <a href="\ozeum\adel\view\frontoffice\blogs.php">BLOG</a>
             <a href="\ozeum\ilyes\server\mvc\view\front\shop.php">BOUTIQUE</a>
-            <a href="#">AVIS</a>
-            <a href="#">GALLERIE</a>
+            <a href="\ozeum\nour\view\addreclamation.php">AVIS</a>
+            <a href="\ozeum\ghofrane\view\frontoffice\acceuil.php">GALLERIE</a>
             <?php if (isset($_SESSION['user_email'])): ?>
                 <a href="#" class="nav-item" id="profile-link">PROFILE</a>
             <?php else: ?>

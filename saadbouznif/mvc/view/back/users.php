@@ -1,3 +1,6 @@
+<?php 
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -22,7 +25,7 @@
             </a>
         </li>
         <li class="nav-item">
-            <a href="../ayoub/backend/addeventv2.html" class="nav-link">
+            <a href="\ozeum\pro\view\back\eventlist.php" class="nav-link">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                     <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
                     <line x1="16" y1="2" x2="16" y2="6"></line>
@@ -33,7 +36,7 @@
             </a>
         </li>
         <li class="nav-item">
-            <a href="../aadel/backoffice.html" class="nav-link">
+            <a href="\ozeum\adel\view\backoffice\form.php" class="nav-link">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                     <path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"></path>
                 </svg>
@@ -41,7 +44,7 @@
             </a>
         </li>
         <li class="nav-item">
-            <a href="../saadbouznif/users.html" class="nav-link active">
+            <a href="\ozeum\saadbouznif\mvc\view\back\users.php" class="nav-link active">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" class="main-grid-item-icon" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
                 <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
                 <circle cx="12" cy="7" r="4" />
@@ -51,7 +54,7 @@
             </a>
         </li>
         <li class="nav-item">
-            <a href="../nour khadouma/feedback.html" class="nav-link ">
+            <a href="\ozeum\nour\view\reclamations.php" class="nav-link ">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                     <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path>
                 </svg>
@@ -59,7 +62,7 @@
             </a>
         </li>
         <li class="nav-item">
-            <a href="../ilyes/back/boutique.html" class="nav-link">
+            <a href="\ozeum\ilyes\server\mvc\view\back\boutique.php" class="nav-link">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                     <circle cx="9" cy="21" r="1"></circle>
                     <circle cx="20" cy="21" r="1"></circle>
@@ -69,7 +72,7 @@
             </a>
         </li>
         <li class="nav-item">
-            <a href="../ghofrane/backoffice/form.html" class="nav-link">
+            <a href="\ozeum\ghofrane\view\backoffice\form.php" class="nav-link">
                 <!-- https://feathericons.dev/?search=feather&iconset=feather -->
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" class="main-grid-item-icon" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
                 <path d="M20.24 12.24a6 6 0 0 0-8.49-8.49L5 10.5V19h8.5z" />
@@ -89,10 +92,18 @@
         <!-- Dashboard Header -->
         <header class="dashboard-header">
             <h1 class="page-title">Gestion d'utilisateurs</h1>
-            <div class="user-menu">
-                <img src="istockphoto-1127367070-612x612.jpg" alt="Admin">
-                <span>Administrateur</span>
-            </div>
+            <?php if (isset($_SESSION['user_email'])): ?>
+        <a href="#" id="admin-profile-link">
+            
+            
+        </a>
+        <div class="dropdown-menu" id="admin-profile-dropdown">
+
+            <a href="\ozeum\logout.php" class="dropdown-item">Déconnecter</a>
+        </div>
+    <?php else: ?>
+        <a href="/ozeum/saadbouznif/mvc/view/front/signin.php">Connexion</a>
+    <?php endif; ?>
         </header>
 
         <!-- Stats Overview -->

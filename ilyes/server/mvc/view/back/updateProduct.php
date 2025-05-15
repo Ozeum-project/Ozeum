@@ -266,13 +266,13 @@ $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
                     
                     <div class="form-group">
                         <label for="product-title">Titre du produit</label>
-                        <input name="product-title" type="text" id="product-title" value="<?= htmlspecialchars($product['titre']) ?>" required minlength="5">
+                        <input name="product-title" type="text" id="product-title" value="<?= htmlspecialchars($product['titre']) ?>"  minlength="5">
                     </div>
                     
                     <div class="form-group">
                         <label>Catégories</label>
                         <div class="categories" id="categories">
-                            <label><input type="radio" name="category" value="art" <?= $product['category'] === 'art' ? 'checked' : '' ?> required> ART</label>
+                            <label><input type="radio" name="category" value="art" <?= $product['category'] === 'art' ? 'checked' : '' ?> > ART</label>
                             <label><input type="radio" name="category" value="book" <?= $product['category'] === 'book' ? 'checked' : '' ?>> LIVRE</label>
                             <label><input type="radio" name="category" value="exhibition" <?= $product['category'] === 'exhibition' ? 'checked' : '' ?>> EXPOSITION</label>
                             <label><input type="radio" name="category" value="painting" <?= $product['category'] === 'painting' ? 'checked' : '' ?>> PEINTURE</label>
@@ -283,7 +283,7 @@ $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
                     <div class="form-group price-inputs">
                         <div>
                             <label for="regular-price">Prix normal (€)</label>
-                            <input name="regular-price" type="number" step="0.01" id="regular-price" value="<?= htmlspecialchars($product['prix_normale']) ?>" required min="0.01">
+                            <input name="regular-price" type="number" step="0.01" id="regular-price" value="<?= htmlspecialchars($product['prix_normale']) ?>"  min="0.01">
                         </div>
                         <div>
                             <label for="sale-price">Prix de vente (€)</label>
@@ -293,7 +293,7 @@ $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
                     
                     <div class="form-group">
                         <label for="product-description">Description du produit</label>
-                        <textarea id="product-description" name="product-description" rows="5" required minlength="20"><?= htmlspecialchars($product['description']) ?></textarea>
+                        <textarea id="product-description" name="product-description" rows="5"  minlength="20"><?= htmlspecialchars($product['description']) ?></textarea>
                     </div>
                     
                     <div class="form-group">
@@ -314,7 +314,7 @@ $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
                     
                     <div class="form-group">
                         <label for="stock-quantity">Quantité en stock</label>
-                        <input type="number" name="stock-quantity" id="stock-quantity" value="<?= htmlspecialchars($product['quantite']) ?>" required min="0">
+                        <input type="number" name="stock-quantity" id="stock-quantity" value="<?= htmlspecialchars($product['quantite']) ?>"  min="0">
                     </div>
                     
                     <div class="actions">

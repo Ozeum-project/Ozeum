@@ -10,7 +10,7 @@ class User {
     private string $telephone;
    
     public function __construct(
-        //int $id,
+        
         string $name,
         string $lastName,
         string $email,
@@ -21,7 +21,7 @@ class User {
         string $role="user",
 
     ) {
-      //  $this->id = $id;
+      
         $this->name = $name;
         $this->lastName = $lastName;
         $this->email = $email;

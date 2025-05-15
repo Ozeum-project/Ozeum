@@ -81,12 +81,12 @@ $cartTotal = $cartSubtotal - $discount + $shipping;
     <header class="header">
         <div class="logo">ozeum</div>
         <nav class="nav">
-            <a href="../../ayoub/inscription.html">ACCUEIL</a>
-            <a href="../../aadel/frontoffice.html">BLOG</a>
-            <a href="../../view/front/shop.php">BOUTIQUE</a>
-            <a href="../../nour khadouma/formajou.html">AVIS</a>
-            <a href="../../ghofrane/accceuil.html">GALLERIE</a>
-            <a href="#">PROFILE</a>
+            <a href="\ozeum\pro\view\front\index.php">ACCUEIL</a>
+            <a href="\ozeum\adel\view\frontoffice\blogs.php">BLOG</a>
+            <a href="\ozeum\ilyes\server\mvc\view\front\shop.php">BOUTIQUE</a>
+            <a href="\ozeum\nour\view\addreclamation.php">AVIS</a>
+            <a href="\ozeum\ghofrane\view\frontoffice\acceuil.php">GALLERIE</a>
+          <a href="/ozeum/saadbouznif/mvc/view/front/signin.php" class="nav-item">LOGIN</a>
         </nav>
     </header>
      <!-- <div class="hero">
