@@ -1,5 +1,5 @@
 <?php
-include_once  'C:\xampp\htdocs\ozeum\ilyes\server\config.php';
+include_once  'C:\xampp\htdocs\ozeum\config.php';
 include 'C:\xampp\htdocs\ozeum\ilyes\server\mvc\model\productModel.php';
 
 class ProductController {

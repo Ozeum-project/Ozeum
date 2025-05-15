@@ -1,24 +1,26 @@
 <?php
-include 'C:\xampp\htdocs\ozeum\saadbouznif\mvc\config.php';
+include 'C:\xampp\htdocs\ozeum\config.php';
 include 'C:\xampp\htdocs\ozeum\saadbouznif\mvc\model\usersModel.php'; 
 class UserController {
     public function addUser(User $user): bool
     {
         $sql = "INSERT INTO users 
-                (name, lastName, email, password, image, adresse)
-                VALUES (:name, :lastName, :email, :password, :image, :adresse)";
+                (name, lastName, email, password, image, adresse, telephone)
+                VALUES (?, ?, ?, ?, ?, ?, ?)";
         
         $db = config::getConnexion();
         
         try {
             $query = $db->prepare($sql);
             $success = $query->execute([
-                'name' => htmlspecialchars($user->getName()),
-                'lastName' => htmlspecialchars($user->getLastName()),
-                'email' => filter_var($user->getEmail(), FILTER_SANITIZE_EMAIL),
-                'password' => $user->getPassword(), // Now contains pre-hashed password
-                'image' => $user->getImage(),
-                'adresse' => htmlspecialchars($user->getAdresse())
+                 htmlspecialchars($user->getName()),
+                 htmlspecialchars($user->getLastName()),
+                filter_var($user->getEmail(), FILTER_SANITIZE_EMAIL),
+                 $user->getPassword(), // Now contains pre-hashed password
+                 $user->getImage(),
+                htmlspecialchars($user->getAdresse()) ,
+                 htmlspecialchars($user->getTelephone()),
+                
             ]);
     
             // Verify insertion was successful
@@ -42,7 +44,7 @@ class UserController {
 
     public function getUserByEmail(string $email): ?array 
     {
-        $sql = "SELECT  name, lastName, email, password, image, adresse 
+        $sql = "SELECT  name, lastName, email, password, image, adresse ,telephone,role
                 FROM users 
                 WHERE email = :email 
                 LIMIT 1";
@@ -93,32 +95,32 @@ class UserController {
     }  
    
 
-    public function updateUser(User $user, int $id) {
+    public function updateUser(User $user, string $email) {
         try {
             $db = config::getConnexion();
-
+    
             $query = $db->prepare("
                 UPDATE users SET 
                     name = :name,
                     lastName = :lastName,
-                    email = :email,
                     password = :password,
                     image = :image,
-                    adresse = :adresse
-                WHERE id = :id
+                    adresse = :adresse,
+                    telephone = :telephone
+                WHERE email = :email
             ");
-
+    
             $query->execute([
                 'name' => $user->getName(),
                 'lastName' => $user->getLastName(),
-                'email' => $user->getEmail(),
-                'password' => $user->getPassword(), // Make sure to hash this before passing to controller
+                'password' => $user->getPassword(),
                 'image' => $user->getImage(),
                 'adresse' => $user->getAdresse(),
-                'id' => $id
+                'telephone' => $user->getTelephone(),
+                'email' => $email
             ]);
-
-            return $query->rowCount(); // Returns number of affected rows
+    
+            return $query->rowCount();
         } catch (PDOException $e) {
             echo "Error while updating user: " . $e->getMessage();
             return false;

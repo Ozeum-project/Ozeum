@@ -31,7 +31,7 @@ if (isset($_SESSION['user_email'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ozeum - Art Gallery Shop</title>
-    <link rel="stylesheet" href="../stylefe.css">
+    <link rel="stylesheet" href="\ozeum\stylefe.css">
     <link rel="stylesheet" href="shop.css">
 </head>
 <body>
@@ -43,18 +43,31 @@ if (isset($_SESSION['user_email'])) {
     <header class="header">
         <div class="logo">ozeum</div>
         <nav class="nav">
-            <a href="../../ayoub/inscription.html">ACCUEIL</a>
-            <a href="../../aadel/frontoffice.html">BLOG</a>
-            <a href="../../ilyas/front/shop.html">BOUTIQUE</a>
-            <a href="../../nour khadouma/formajou.html">AVIS</a>
-            <a href="../../ghofrane/accceuil.html">GALLERIE</a>
-            <a href="\ozeum\saadbouznif\mvc\view\front\profileInfo.php">PROFILE</a>
+            <a href="\ozeum\pro\view\front\index.php">ACCUEIL</a>
+            <a href="#">BLOG</a>
+            <a href="\ozeum\ilyes\server\mvc\view\front\shop.php">BOUTIQUE</a>
+            <a href="#">AVIS</a>
+            <a href="#">GALLERIE</a>
+            <a href="#" class="nav-item" id="profile-link">PROFILE</a>
         </nav>
-    </header>
-    <div class="hero">
-        <div class="hero-content">
-            <h1>Shop</h1>
+        <div class="dropdown-menu" id="profile-dropdown">
+            <a href="\ozeum\saadbouznif\mvc\view\front\profileInfo.php" class="dropdown-item"><i>👤</i> Mon Compte</a>
+            <a href="#" class="dropdown-item"><i>🚪</i> Déconnecter</a>
         </div>
+    </header>
+
+    <div class="hero">
+        <div class="keyboard">
+            <span class="key">B</span>
+            <span class="key">O</span>
+            <span class="key">U</span>
+            <span class="key">T</span>
+            <span class="key">I</span>
+            <span class="key">Q</span>
+            <span class="key">U</span>
+            <span class="key">E</span>
+           
+          </div>
     </div>
     <main class="main-content">
         <section class="product-section">
@@ -330,7 +343,29 @@ if (isset($_SESSION['user_email'])) {
                 }
             });
         }
-    });
+    }); 
+    document.addEventListener('DOMContentLoaded', function() {
+            const profileLink = document.getElementById('profile-link');
+            const profileDropdown = document.getElementById('profile-dropdown');
+            
+            profileLink.addEventListener('click', function(e) {
+                e.preventDefault();
+                e.stopPropagation(); // Prevent event from bubbling up
+                profileDropdown.classList.toggle('active');
+            });
+            
+            // Close dropdown when clicking outside
+            document.addEventListener('click', function(e) {
+                if (!profileLink.contains(e.target) && !profileDropdown.contains(e.target)) {
+                    profileDropdown.classList.remove('active');
+                }
+            });
+            
+            // Prevent dropdown from closing when clicking inside it
+            profileDropdown.addEventListener('click', function(e) {
+                e.stopPropagation();
+            });
+        });
     </script>
 </body>
 </html>

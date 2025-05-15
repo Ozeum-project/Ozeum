@@ -21,13 +21,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         
         // Create user object with hashed password
         $user = new User(
-            0, // Let database auto-increment handle ID
             $_POST["name"],
             $_POST["lastName"],
             $_POST["email"],
-            $hashedPassword, // Store the hashed password
+            $hashedPassword,
             "default.jpg",
-            ""
+            "",
+            "", // telephone
+           
         );
 
         // Try to add user

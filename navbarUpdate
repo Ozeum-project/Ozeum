@@ -1,0 +1,39 @@
+<header class="header">
+        <div class="logo">ozeum</div>
+        <nav class="nav">
+            <a href="../ayoub/index.html">ACCUEIL</a>
+            <a href="#">BLOG</a>
+            <a href="\ozeum\ilyes\server\mvc\view\front\shop.php">BOUTIQUE</a>
+            <a href="#">AVIS</a>
+            <a href="#">GALLERIE</a>
+            <a href="#" class="nav-item" id="profile-link">PROFILE</a>
+        </nav>
+        <div class="dropdown-menu" id="profile-dropdown">
+            <a href="\ozeum\saadbouznif\mvc\view\front\profileInfo.php" class="dropdown-item"><i>👤</i> Mon Compte</a>
+            <a href="#" class="dropdown-item"><i>🚪</i> Déconnecter</a>
+        </div>
+    </header> 
+
+//js
+    document.addEventListener('DOMContentLoaded', function() {
+        const profileLink = document.getElementById('profile-link');
+        const profileDropdown = document.getElementById('profile-dropdown');
+        
+        profileLink.addEventListener('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation(); // Prevent event from bubbling up
+            profileDropdown.classList.toggle('active');
+        });
+        
+        // Close dropdown when clicking outside
+        document.addEventListener('click', function(e) {
+            if (!profileLink.contains(e.target) && !profileDropdown.contains(e.target)) {
+                profileDropdown.classList.remove('active');
+            }
+        });
+        
+        // Prevent dropdown from closing when clicking inside it
+        profileDropdown.addEventListener('click', function(e) {
+            e.stopPropagation();
+        });
+    });

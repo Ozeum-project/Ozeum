@@ -44,7 +44,7 @@ if (isset($_POST['coupon']) && isset($_POST['promotion'])) {
                 </a>
             </li>
             <li class="nav-item">
-                <a href="../../ayoub/backend/addeventv2.html" class="nav-link">
+                <a href="\ozeum\pro\view\back\eventlist.php" class="nav-link">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                         <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
                         <line x1="16" y1="2" x2="16" y2="6"></line>
@@ -142,7 +142,7 @@ if (isset($_POST['coupon']) && isset($_POST['promotion'])) {
         </section>
         <?php if (!empty($coupons)): ?>
 <div class="coupons-list" style="margin-bottom: 24px; box-shadow: 0 4px 16px rgba(0,0,0,0.08), 0 1.5px 4px rgba(0,0,0,0.06); border-radius: 10px; background: #fff; padding: 32px 28px 24px 28px;">    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
-        <h3 style="margin:0;">Available Coupons</h3>
+        <h3 style="margin:0;">Coupons disponible</h3>
         <button class="btn btn-primary" type="button" onclick="openCouponModal()">
           Ajouter un Coupon
       </button>
@@ -161,10 +161,12 @@ if (isset($_POST['coupon']) && isset($_POST['promotion'])) {
                     <td style="padding:12px;"><?= htmlspecialchars($coupon->getCoupon()) ?></td>
                     <td style="padding:12px; color:#0078d7;"><?= intval($coupon->getPromotion()) ?>%</td>
                     <td style="padding:12px; text-align:right;">
-                        <a href="deleteCoupon.php?id=<?= urlencode($coupon->getId()) ?>" onclick="return confirm('Supprimer ce coupon ?');">
-                            <button class="btn btn-secondary2" style="background-color: #ea4335; color: white; padding:4px 10px; border-radius:4px;">
-                                Supprimer
-                            </button>
+                        <a class='btn btn-secondary' style='padding-top: 19px;margin-right:5px;' href="deleteCoupon.php?id=<?= urlencode($coupon->getId()) ?>" onclick="return confirm('Supprimer ce coupon ?');">
+                            <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' width='24' height='24' class='main-grid-item-icon' fill='none' stroke='currentColor' stroke-linecap='round' stroke-linejoin='round' stroke-width='2'>
+                                <path d='M21 4H8l-7 8 7 8h13a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2z' />
+                                <line x1='18' x2='12' y1='9' y2='15' />
+                                <line x1='12' x2='18' y1='9' y2='15' />
+                                </svg>
                         </a>
                     </td>
                 </tr>
@@ -175,7 +177,7 @@ if (isset($_POST['coupon']) && isset($_POST['promotion'])) {
 <?php else: ?>
     <div class="coupons-list" style="margin-bottom: 24px; box-shadow: 0 4px 16px rgba(0,0,0,0.08), 0 1.5px 4px rgba(0,0,0,0.06); border-radius: 10px; background: #fff; padding: 32px 28px 24px 28px;">
         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
-            <h3 style="margin:0;">Available Coupons</h3>
+            <h3 style="margin:0;">Coupons disponible</h3>
             <button class="btn btn-primary" type="button" onclick="openCouponModal()">
                 Ajouter un Coupon
             </button>
@@ -237,25 +239,27 @@ foreach ($products as $productData) {
         <td style="padding: 12px;"><?= htmlspecialchars($productData["prix_promotion"]) ?></td>
         <td style="padding: 12px;"><?= htmlspecialchars($productData["quantite"]) ?></td>
         <td style="padding: 12px; text-align: right;">
+              <!-- Bouton Détails (à compléter selon ton projet) -->
+              <a class='btn btn-secondary' style='padding-top: 19px;margin-right:5px;' <?php echo "onclick='showUserDetails(".json_encode($productData).")'"; ?>>
+                        <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' width='24' height='24' class='main-grid-item-icon' fill='none' stroke='currentColor' stroke-linecap='round' stroke-linejoin='round' stroke-width='2'>
+                            <path d='M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z' />
+                            <circle cx='12' cy='12' r='3' />
+                            </svg>
+                        </a>
             <!-- Bouton Modifier (à compléter selon ton projet) -->
-           <a href="updateProduct.php?id=<?= urlencode($productData['id']) ?>">
-        <button class="btn btn-secondary" style="margin-right: 5px; background-color: #4285f4; color: white;">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
-                <path d="M20 14.66V20a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h5.34"></path>
-                <polygon points="18 2 22 6 12 16 8 16 8 12 18 2"></polygon>
-            </svg>
-        </button>
+            <a class='btn btn-secondary' style='padding-top: 19px;margin-right:5px;' 
+   data-offer='<?= htmlspecialchars(json_encode($offer), ENT_QUOTES, "UTF-8") ?>'
+   onclick="showUserDetails(this)">           <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' width='24' height='24' class='main-grid-item-icon' fill='none' stroke='currentColor' stroke-linecap='round' stroke-linejoin='round' stroke-width='2'>
+                                <path d='M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z' />
+                                </svg>
     </a>
     <!-- Bouton Supprimer -->
-    <a href="deleteProduct.php?id=<?= urlencode($productData['id']) ?>">
-        <button class="btn btn-secondary" style="background-color: #ea4335; color: white;">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
-                <polyline points="3 6 5 6 21 6"></polyline>
-                <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
-                <line x1="10" y1="11" x2="10" y2="17"></line>
-                <line x1="14" y1="11" x2="14" y2="17"></line>
-            </svg>
-        </button>
+    <a href="deleteProduct.php?id=<?= urlencode($productData['id']) ?>" class='btn btn-secondary btn-delete' style='padding-top: 19px;margin-right:5px;'>
+    <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' width='24' height='24' class='main-grid-item-icon' fill='none' stroke='currentColor' stroke-linecap='round' stroke-linejoin='round' stroke-width='2'>
+                                <path d='M21 4H8l-7 8 7 8h13a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2z' />
+                                <line x1='18' x2='12' y1='9' y2='15' />
+                                <line x1='12' x2='18' y1='9' y2='15' />
+                                </svg>
     </a>
         </td>
     </tr>
@@ -274,21 +278,28 @@ foreach ($products as $productData) {
            
         </div>
     </div>
+    <div id="userDetailsModal" class="modal" style="display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.5); align-items: center; justify-content: center;">
+        <div class="dashboard-card" style="width: 500px; max-height: 80%; overflow-y: auto;">
+            <div class="card-header">
+                <h2 class="card-title">Plus de details</h2>
+                <button onclick="closeUserModal()" class="btn btn-secondary">Close</button>
+            </div>
+            <div id="userDetailsContent">
+                <!-- User details will be dynamically populated -->
+            </div>
+        </div>
+    </div>
 
     <script>
         // Confirmation de suppression
-        document.querySelectorAll(".btn-secondary").forEach((button, index) => {
-            if (index % 2 !== 0) { // Seulement pour les boutons de suppression (indices impairs)
-                button.addEventListener("click", function () {
-                    const productName = this.closest("tr").querySelector("td:nth-child(2)").textContent;
-                    if (confirm(`Êtes-vous sûr de vouloir supprimer "${productName}" ?`)) {
-                        // La logique de suppression irait ici
-                        this.closest("tr").remove();
-                        alert(`Le produit "${productName}" a été supprimé.`);
-                    }
-                });
-            }
-        });
+        document.querySelectorAll(".btn-delete").forEach((button) => {
+    button.addEventListener("click", function (event) {
+        const productName = this.closest("tr").querySelector("td:nth-child(2)").textContent;
+        if (!confirm(`Êtes-vous sûr de vouloir supprimer "${productName}" ?`)) {
+            event.preventDefault(); // Stop the link if not confirmed
+        }
+    });
+});
 
         // Fonctionnalité de recherche
         const searchBox = document.querySelector(".form-input[placeholder='Rechercher par nom de produit...']");
@@ -347,6 +358,51 @@ window.onclick = function(event) {
         modal.style.display = "none";
     }
 }
+//-------------------------------------------
+function showUserDetails(product) {
+   
+
+    const modalContent = document.getElementById('userDetailsContent');
+    modalContent.innerHTML = `
+        <div class="form-grid">
+            <div class="form-group">
+                <label class="form-label">ID</label>
+                <input class="form-input" value="${product.id}" readonly>
+            </div>
+            <div class="form-group">
+                <label class="form-label">Titre</label>
+                <input class="form-input" value="${product.titre}" readonly>
+            </div>
+            <div class="form-group">
+                <label class="form-label">Catégorie</label>
+                <input class="form-input" value="${product.category}" readonly>
+            </div>
+            <div class="form-group">
+                <label class="form-label">Prix Normal</label>
+                <input class="form-input" value="${product.prix_normale}" readonly>
+            </div>
+            <div class="form-group">
+                <label class="form-label">Prix Promotion</label>
+                <input class="form-input" value="${product.prix_promotion}" readonly>
+            </div>
+            <div class="form-group">
+                <label class="form-label">Quantité</label>
+                <input class="form-input" value="${product.quantite}" readonly>
+            </div>
+            <div class="form-group">
+                <label class="form-label">Description</label>
+                <textarea class="form-input" readonly>${product.description || ''}</textarea>
+            </div>
+        </div>
+    `;
+    document.getElementById('userDetailsModal').style.display = 'flex';
+}
+// Close User Details Modal
+function closeUserModal() {
+    document.getElementById('userDetailsModal').style.display = 'none';
+}
+
+//-----------------------------------
     </script>
 </body> 
 

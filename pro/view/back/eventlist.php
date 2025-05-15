@@ -1,0 +1,267 @@
+<?php
+include '../../controller/eventcontroller.php';
+
+$eventController = new EventController();
+$events = $eventController->listEvents();
+?>
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Ozeum - Liste des Événements</title>
+    <link rel="stylesheet" href="bcdstyle.css"> 
+    <link rel="stylesheet" href="ouuu">   
+</head>
+<body>
+     <!-- Sidebar -->
+     <aside class="sidebar">
+        <div class="logo">ozeum</div>
+        <ul class="nav-menu">
+            <li class="nav-item">
+                <a href="#" class="nav-link">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                        <polyline points="9 22 9 12 15 12 15 22"></polyline>
+                    </svg>
+                    <span>Tableau de bord</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="eventlist.php" class="nav-link active">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                        <line x1="16" y1="2" x2="16" y2="6"></line>
+                        <line x1="8" y1="2" x2="8" y2="6"></line>
+                        <line x1="3" y1="10" x2="21" y2="10"></line>
+                    </svg>
+                    <span>Évènements</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="../../aadel/backoffice.html" class="nav-link">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"></path>
+                    </svg>
+                    <span>Blog</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="../../saadbouznif/users.html" class="nav-link">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" class="main-grid-item-icon" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+                    <circle cx="12" cy="7" r="4" />
+                </svg>
+      
+                    <span>Visiteurs</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="../../nour khadouma/feedback.html" class="nav-link ">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path>
+                    </svg>
+                    <span>Avis et Réclamations</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="../../ilyes/back/boutique.html" class="nav-link">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="9" cy="21" r="1"></circle>
+                        <circle cx="20" cy="21" r="1"></circle>
+                        <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+                    </svg>
+                    <span>Boutique</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="../../../ghofrane/view/backoffice/form.php" class="nav-link ">
+                    <!-- https://feathericons.dev/?search=feather&iconset=feather -->
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" class="main-grid-item-icon" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+                    <path d="M20.24 12.24a6 6 0 0 0-8.49-8.49L5 10.5V19h8.5z" />
+                    <line x1="16" x2="2" y1="8" y2="22" />
+                    <line x1="17.5" x2="9" y1="15" y2="15" />
+                    </svg>
+      
+                    <span>Gallerie</span>
+                </a>
+            </li>
+    
+        </ul>
+    </aside>
+
+
+        
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Header -->
+        <header class="dashboard-header">
+            <h1 class="page-title">Liste des Événements</h1>
+            <div class="user-menu">
+                <span>Admin</span>
+            </div>
+        </header>
+
+        <!-- Stats Cards -->
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-title">TOTAL ÉVÉNEMENTS</div>
+                <div class="stat-value">42</div>
+                <div class="stat-change">+12% ce mois</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-title">ÉVÉNEMENTS ACTIFS</div>
+                <div class="stat-value">18</div>
+                <div class="stat-change">+5% ce mois</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-title">INSCRIPTIONS</div>
+                <div class="stat-value">1,245</div>
+                <div class="stat-change">+16% ce mois</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-title">TAUX DE PARTICIPATION</div>
+                <div class="stat-value">78%</div>
+                <div class="stat-change">+3% ce mois</div>
+            </div>
+        </div>
+
+        <!-- Events Table -->
+        <div class="dashboard-card">
+            <div class="card-header">
+                <h2 class="card-title">Tous les Événements</h2>
+                <a href="addevent.php" class="btn btn-primary">Ajouter un Événement</a>
+            </div>
+            
+            <table style="width: 100%; border-collapse: collapse; margin-top: 15px;">
+                <thead>
+                    <tr style="background-color: #f5f5f5; border-bottom: 1px solid #ddd;">
+                        <th style="padding: 12px; text-align: left;">ID</th>
+                        <th style="padding: 12px; text-align: left;">Titre</th>
+                        <th style="padding: 12px; text-align: left;">Date Début</th>
+                        <th style="padding: 12px; text-align: left;">Catégorie</th>
+                        <th style="padding: 12px; text-align: left;">Participants</th>
+                        <th style="padding: 12px; text-align: right;">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php foreach ($events as $event): ?>
+                        <tr>
+                            <td style="padding: 12px;"><?php echo htmlspecialchars($event['idd']); ?></td>
+                            <td style="padding: 12px;"><?php echo htmlspecialchars($event['titre']); ?></td>
+                            <td style="padding: 12px;"><?php echo htmlspecialchars($event['date_debut']); ?></td>
+                            <td style="padding: 12px;"><?php echo htmlspecialchars($event['categorie']); ?></td>
+                            <td style="padding: 12px;"><?php echo htmlspecialchars($event['nbmax']); ?></td>
+                            <td style="padding: 12px; text-align: right;">
+                                <a  class='btn btn-secondary' style='padding-top: 19px;margin-right:5px;' onclick='showEventDetails(<?php echo json_encode($event); ?>)'>
+                                    <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' width='24' height='24' class='main-grid-item-icon' fill='none' stroke='currentColor' stroke-linecap='round' stroke-linejoin='round' stroke-width='2'>
+                                    <path d='M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z' />
+                                    <circle cx='12' cy='12' r='3' />
+                                    </svg>
+                                </a>
+                                    <a href="updateevent.php?id=<?php echo $event['idd']; ?>" class="btn btn-secondary" style='padding-top: 19px;margin-right:5px;'>
+                                        <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' width='24' height='24' class='main-grid-item-icon' fill='none' stroke='currentColor' stroke-linecap='round' stroke-linejoin='round' stroke-width='2'>
+                                        <path d='M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z' />
+                                        </svg>
+                                    </a>
+                                    <a href="deleteevent.php?id=<?php echo $event['idd']; ?>" class="btn btn-secondary" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cet événement?')" style='padding-top: 19px;margin-right:5px;'>
+                                        <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' width='24' height='24' class='main-grid-item-icon' fill='none' stroke='currentColor' stroke-linecap='round' stroke-linejoin='round' stroke-width='2'>
+                                        <path d='M21 4H8l-7 8 7 8h13a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2z' />
+                                        <line x1='18' x2='12' y1='9' y2='15' />
+                                        <line x1='12' x2='18' y1='9' y2='15' />
+                                        </svg>
+                                    </a>
+                            </td>
+                        </tr>
+                    <?php endforeach; ?>
+                </tbody>
+            </table>
+        </div>
+    </main>
+    <div id="userDetailsModal" class="modal" style="display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.5); align-items: center; justify-content: center;">
+        <div class="dashboard-card" style="width: 500px; max-height: 80%; overflow-y: auto;">
+            <div class="card-header">
+                <h2 class="card-title">Plus de details</h2>
+                <button onclick="closeUserModal()" class="btn btn-secondary">Close</button>
+            </div>
+            <div id="userDetailsContent">
+                <!-- User details will be dynamically populated -->
+            </div>
+        </div>
+    </div>
+    <script>
+      function showEventDetails(event) {
+    console.log(event);
+    const modalContent = document.getElementById('userDetailsContent');        
+
+    // Format dates and times
+    const formatDate = (dateObj) => {
+        if (dateObj instanceof Date) {
+            return dateObj.toLocaleDateString();
+        }
+        return dateObj;
+    };
+
+    const formatTime = (timeObj) => {
+        if (timeObj instanceof Date) {
+            return timeObj.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+        }
+        return timeObj;
+    };
+
+    modalContent.innerHTML = `
+        <div class="form-grid">
+            <div class="form-group">
+                <label class="form-label">ID</label>
+                <input class="form-input" value="${event.idd}" readonly>
+            </div>
+            <div class="form-group">
+                <label class="form-label">Titre</label>
+                <input class="form-input" value="${event.titre}" readonly>
+            </div>
+            <div class="form-group">
+                <label class="form-label">Date de début</label>
+                <input class="form-input" value="${formatDate(event.date_debut)}" readonly>
+            </div>
+            <div class="form-group">
+                <label class="form-label">Heure de début</label>
+                <input class="form-input" value="${formatTime(event.heure_debut)}" readonly>
+            </div>
+            <div class="form-group">
+                <label class="form-label">Date de fin</label>
+                <input class="form-input" value="${formatDate(event.date_fin)}" readonly>
+            </div>
+            <div class="form-group">
+                <label class="form-label">Heure de fin</label>
+                <input class="form-input" value="${formatTime(event.heure_fin)}" readonly>
+            </div>
+            <div class="form-group">
+                <label class="form-label">Lieu</label>
+                <input class="form-input" value="${event.lieu}" readonly>
+            </div>
+            <div class="form-group">
+                <label class="form-label">Catégorie</label>
+                <input class="form-input" value="${event.categorie}" readonly>
+            </div>
+            <div class="form-group">
+                <label class="form-label">Nombre max. de participants</label>
+                <input class="form-input" value="${event.nbmax}" readonly>
+            </div>
+            <div class="form-group full-width">
+                <label class="form-label">Description</label>
+                <textarea class="form-textarea" readonly>${event.description}</textarea>
+            </div>
+        </div>
+    `;
+    document.getElementById('userDetailsModal').style.display = 'flex';
+}
+
+// Close User Details Modal
+function closeUserModal() {
+    document.getElementById('userDetailsModal').style.display = 'none';
+}
+
+    </script>
+</body>
+</html>

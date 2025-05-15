@@ -1,6 +1,7 @@
 <?php 
 
-session_start();
+session_start(); 
+
 include 'C:\xampp\htdocs\ozeum\saadbouznif\mvc\controller\usersController.php';
 // ...existing code...
 $error = "";
@@ -21,17 +22,25 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['email'], $_POST['pass
         if ($user) {
             // Secure password verification using password_verify
             if (password_verify($password, $user['password'])) {
-                // Successful login
-               
+                // Successful login 
+                
+                //die("DEBUG: Should redirect to admin dashboard. Role is: " . $user['role']);
                 $_SESSION['user_email'] = $user['email'];
                 $_SESSION['user_name'] = $user['name'];
                 $_SESSION['user_lastName'] = $user['lastName'];
+                $_SESSION['user_role'] = $user['role'];
                 
                 // Regenerate session ID to prevent session fixation
                 session_regenerate_id(true);
                 
-                header("location: /ozeum/ilyes/server/mvc/view/front/shop.php");
-                exit();
+                if ($user['role'] === 'admin') {
+                    header("Location: /ozeum/ilyes/server/mvc/view/back/boutique.php");
+                    error_log("Attempting admin redirect");
+                } else { 
+                    error_log("Attempting user redirect");
+                    header("Location: /ozeum/pro/view/front/index.php"); // normal user
+                }
+exit();
             } else {
                 $error = "Email ou mot de passe incorrect.";
             }
@@ -202,7 +211,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['email'], $_POST['pass
         }
     </style>
 </head>
-<body>
+<body> 
+
     <div class="form-container">
         <?php if ($registrationSuccess): ?>
             <div class="success-message">
