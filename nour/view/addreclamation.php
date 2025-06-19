@@ -1,4 +1,5 @@
 <?php
+session_start();
 include 'C:\xampp\htdocs\ozeum\nour\controller\reclamationcontroller.php';
 
 $error = "";
@@ -356,24 +357,34 @@ if (
     width: 100%;
 }
     </style>
+        <link rel="stylesheet" href="\ozeum\stylefe.css">
+
     <script src="addreclamation.js" defer></script>
 </head>
 <body>
-    <div class="top-bar">
+    <!-- <div class="top-bar">
         <div>Opening Hours: 9:00 AM - 6:00 PM</div>
         <div>Contact: +216 95 093 313</div>
-    </div>
+    </div> -->
 
-    <header class="main-header">
-        <a href="index.html" class="logo">ozeum</a>
+    <header class="header">
+        <div class="logo">ozeum</div>
         <nav class="nav">
             <a href="\ozeum\pro\view\front\index.php">ACCUEIL</a>
             <a href="\ozeum\adel\view\frontoffice\blogs.php">BLOG</a>
             <a href="\ozeum\ilyes\server\mvc\view\front\shop.php">BOUTIQUE</a>
             <a href="\ozeum\nour\view\addreclamation.php">AVIS</a>
             <a href="\ozeum\ghofrane\view\frontoffice\acceuil.php">GALLERIE</a>
-          <a href="/ozeum/saadbouznif/mvc/view/front/signin.php" class="nav-item">LOGIN</a>
+            <?php if (isset($_SESSION['user_email'])): ?>
+                <a href="#" class="nav-item" id="profile-link">PROFILE</a>
+            <?php else: ?>
+              <a href="/ozeum/saadbouznif/mvc/view/front/signin.php" class="nav-item">LOGIN</a>
+            <?php endif; ?>
         </nav>
+        <div class="dropdown-menu" id="profile-dropdown">
+            <a href="\ozeum\saadbouznif\mvc\view\front\profileInfo.php" class="dropdown-item"><i>👤</i> Mon Compte</a>
+            <a href="\ozeum\logout.php" class="dropdown-item"><i>🚪</i> Déconnecter</a>
+        </div>
     </header>
 
     <section class="hero">
@@ -463,5 +474,29 @@ if (
             &copy; 2025 Ozeum. All rights reserved.
         </div>
     </footer>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const profileLink = document.getElementById('profile-link');
+            const profileDropdown = document.getElementById('profile-dropdown');
+            
+            profileLink.addEventListener('click', function(e) {
+                e.preventDefault();
+                e.stopPropagation(); // Prevent event from bubbling up
+                profileDropdown.classList.toggle('active');
+            });
+            
+            // Close dropdown when clicking outside
+            document.addEventListener('click', function(e) {
+                if (!profileLink.contains(e.target) && !profileDropdown.contains(e.target)) {
+                    profileDropdown.classList.remove('active');
+                }
+            });
+            
+            // Prevent dropdown from closing when clicking inside it
+            profileDropdown.addEventListener('click', function(e) {
+                e.stopPropagation();
+            });
+        });
+    </script>
 </body>
 </html>

@@ -11,6 +11,7 @@ $events = $eventController->listEvents();
     <meta charset="UTF-8">
     <title>Musée - Événements à venir</title>
     <link rel="stylesheet" href="\ozeum\stylefe.css">
+    
 </head>
 <body> 
 <?php if (isset($_SESSION['user']['role'])): ?>
@@ -26,10 +27,10 @@ $events = $eventController->listEvents();
 <?php endif; ?>
 
 
-<div class="top-bar">
+<!-- <div class="top-bar">
         <div>LE MUSÉE EST OUVERT AUJOURD'HUI DE 10H À 17H</div>
         <div>34ÈME AVE, Technopole, Ghazela</div>
-    </div>
+    </div> -->
 
   <header class="header">
         <div class="logo">ozeum</div>

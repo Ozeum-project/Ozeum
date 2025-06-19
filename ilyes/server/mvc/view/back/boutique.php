@@ -1,4 +1,6 @@
-<?php
+<?php 
+
+session_start();
 include_once 'C:\xampp\htdocs\ozeum\ilyes\server\mvc\controller\couponsController.php';
 //getCoupon !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 $couponsController = new CouponsController();
@@ -22,6 +24,8 @@ if (isset($_POST['coupon']) && isset($_POST['promotion'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ozeum Admin - Gérer les Produits</title>
     <link rel="stylesheet" href="../../../../users.css">
+    <link rel="stylesheet" href="\ozeum\stylefe.css">
+
 </head>
 <body> 
 <?php if (!empty($_SESSION['coupon_added'])): ?>
@@ -112,17 +116,27 @@ if (isset($_POST['coupon']) && isset($_POST['promotion'])) {
         <header class="dashboard-header">
             <h1 class="page-title">Gallerie</h1>
             <?php if (isset($_SESSION['user_email'])): ?>
-        <a href="#" id="admin-profile-link">
-            
-            
-        </a>
-        <div class="dropdown-menu" id="admin-profile-dropdown">
-
-            <a href="\ozeum\logout.php" class="dropdown-item">Déconnecter</a>
+                <a href="#" 
+   class="nav-item" 
+   id="profile-link"
+   style="
+       padding: 0.5rem 1rem;
+       color: inherit;
+       text-decoration: none;
+       font-weight: 500;
+       transition: color 0.3s ease;
+       border-radius: 4px;
+   ">
+    PROFILE
+</a>
+            <?php else: ?>
+              <a href="/ozeum/saadbouznif/mvc/view/front/signin.php" class="nav-item">LOGIN</a>
+            <?php endif; ?>
+        </nav>
+        <div class="dropdown-menu" id="profile-dropdown">
+            <a href="\ozeum\saadbouznif\mvc\view\front\profileInfo.php" class="dropdown-item"><i>👤</i> Mon Compte</a>
+            <a href="\ozeum\logout.php" class="dropdown-item"><i>🚪</i> Déconnecter</a>
         </div>
-    <?php else: ?>
-        <a href="/ozeum/saadbouznif/mvc/view/front/signin.php">Connexion</a>
-    <?php endif; ?>
         </header>
 
         <!-- Stats Overview -->
@@ -412,6 +426,29 @@ function closeUserModal() {
 
 //----------------------------------- 
 
+        document.addEventListener('DOMContentLoaded', function() {
+            const profileLink = document.getElementById('profile-link');
+            const profileDropdown = document.getElementById('profile-dropdown');
+            
+            profileLink.addEventListener('click', function(e) {
+                e.preventDefault();
+                e.stopPropagation(); // Prevent event from bubbling up
+                profileDropdown.classList.toggle('active');
+            });
+            
+            // Close dropdown when clicking outside
+            document.addEventListener('click', function(e) {
+                if (!profileLink.contains(e.target) && !profileDropdown.contains(e.target)) {
+                    profileDropdown.classList.remove('active');
+                }
+            });
+            
+            // Prevent dropdown from closing when clicking inside it
+            profileDropdown.addEventListener('click', function(e) {
+                e.stopPropagation();
+            });
+        });
+    
     </script>
 </body> 
 

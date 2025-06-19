@@ -1,4 +1,4 @@
-:root {
+/* :root {
     --primary-color: #b8860b;
     --secondary-color: #1a1a1a;
     --accent-color: #c19a6b;
@@ -14,83 +14,9 @@
     padding: 0;
     box-sizing: border-box;
     font-family: 'Arial', sans-serif;
-}
+} */
 
 /* Header Styles */
-.header {
-    background: var(--secondary-color);
-    padding: 1rem 2rem;
-    display: flex;
-    justify-content: space-between;
-    align-items: center; 
-    position: fixed; /* Fixe la navbar en haut */
-    top: 0;
-    left: 0;
-    width: 100%;
-    z-index: 1000; /* Assure qu'elle est au-dessus du contenu */
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Effet d'ombre pour la visibilité */
-}
-
-body {
-    padding-top: 50px; /* Ajoute un espace en haut pour éviter que le contenu soit caché sous la navbar */
-}
-
-.logo {
-    color: #fff;
-    font-size: 2rem;
-    font-weight: bold;
-}
-
-.nav-menu {
-    display: flex;
-    gap: 2rem;
-}
-
-.nav-menu a {
-    color: #fff;
-    text-decoration: none;
-    text-transform: uppercase;
-    font-size: 0.9rem;
-    transition: color 0.3s ease;
-}
-
-.nav-menu a:hover {
-    color: var(--primary-color);
-}
-
-.hero {
-    height: 400px;
-    background-image: url('https://th.bing.com/th/id/OIP.P5tEClpAS8mRDclhB-MypQHaF5?rs=1&pid=ImgDetMain');
-    background-size: cover;
-    background-position: center;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #fff;
-    position: relative;
-}
-
-.hero::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(0, 0, 0, 0.4);
-}
-
-.hero-content {
-    position: relative;
-    z-index: 1;
-    text-align: center;
-}
-
-.hero h1 {
-    font-size: 48px;
-    margin-bottom: 20px;
-    color: var(--primary-color);
-}
 
 /* Main Content */
 .main-content {
@@ -154,6 +80,15 @@ body {
     height: auto;
     transition: filter 0.3s ease;
 }
+.cart-product-img {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 4px;
+    max-width: 100%;
+    max-height: 100%;
+    display: block;
+  }
 
 .product-card:hover .product-image {
     filter: brightness(70%);
@@ -283,12 +218,14 @@ body {
     margin-bottom: 1rem;
     padding-bottom: 1rem;
     border-bottom: 1px solid var(--border-color);
+    align-items: center; /* This ensures vertical alignment */
 }
 
 .cart-item img {
-    width: 60px;
-    height: 60px;
-    object-fit: cover;
+    width: 80px; /* Fixed width */
+    height: 80px; /* Fixed height to make it square */
+    min-width: 80px; /* Prevent shrinking */
+    object-fit: cover; /* Ensures images maintain aspect ratio */
     border-radius: 4px;
 }
 

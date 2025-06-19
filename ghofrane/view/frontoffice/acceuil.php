@@ -1,4 +1,7 @@
+<?php 
+session_start();
 
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,13 +10,14 @@
     <title>Ozeum - Museum Website</title>
     <link rel="stylesheet" href="stylefe.css">
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="\ozeum\stylefe.css">
     <script src="../backoffice/form.js"></script>
 </head>
 <body>
-    <div class="top-bar">
+    <!-- <div class="top-bar">
         <div>LE MUSÉE EST OUVERT AUJOURD'HUI DE 10H À 17H</div>
         <div>34ÈME AVE, Technopole, Ghazela</div>
-    </div>
+    </div> -->
 
     <header class="header">
         <div class="logo">ozeum</div>
@@ -23,7 +27,16 @@
             <a href="\ozeum\ilyes\server\mvc\view\front\shop.php">BOUTIQUE</a>
             <a href="\ozeum\nour\view\addreclamation.php">AVIS</a>
             <a href="\ozeum\ghofrane\view\frontoffice\acceuil.php">GALLERIE</a>
-          <a href="/ozeum/saadbouznif/mvc/view/front/signin.php" class="nav-item">LOGIN</a>
+            <?php if (isset($_SESSION['user_email'])): ?>
+                <a href="#" class="nav-item" id="profile-link">PROFILE</a>
+            <?php else: ?>
+              <a href="/ozeum/saadbouznif/mvc/view/front/signin.php" class="nav-item">LOGIN</a>
+            <?php endif; ?>
+        </nav>
+        <div class="dropdown-menu" id="profile-dropdown">
+            <a href="\ozeum\saadbouznif\mvc\view\front\profileInfo.php" class="dropdown-item"><i>👤</i> Mon Compte</a>
+            <a href="\ozeum\logout.php" class="dropdown-item"><i>🚪</i> Déconnecter</a>
+        </div>
         </nav>
     </header>
 
@@ -167,6 +180,29 @@
             </div>
         </div>
     </footer>
-
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const profileLink = document.getElementById('profile-link');
+            const profileDropdown = document.getElementById('profile-dropdown');
+            
+            profileLink.addEventListener('click', function(e) {
+                e.preventDefault();
+                e.stopPropagation(); // Prevent event from bubbling up
+                profileDropdown.classList.toggle('active');
+            });
+            
+            // Close dropdown when clicking outside
+            document.addEventListener('click', function(e) {
+                if (!profileLink.contains(e.target) && !profileDropdown.contains(e.target)) {
+                    profileDropdown.classList.remove('active');
+                }
+            });
+            
+            // Prevent dropdown from closing when clicking inside it
+            profileDropdown.addEventListener('click', function(e) {
+                e.stopPropagation();
+            });
+        });
+    </script>
 </body>
 </html>

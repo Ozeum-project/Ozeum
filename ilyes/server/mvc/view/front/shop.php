@@ -35,15 +35,11 @@ if (isset($_SESSION['user_email'])) {
     <link rel="stylesheet" href="shop.css">
 </head>
 <body>
-    <div class="top-bar">
-        <div>LE MUSÉE EST OUVERT AUJOURD'HUI DE 10H À 17H</div>
-        <div>34ÈME AVE, Technopole, Ghazela</div>
-    </div>
-
-    <header class="header">
+    
+     <header class="header">
         <div class="logo">ozeum</div>
         <nav class="nav">
-        <a href="\ozeum\pro\view\front\index.php">ACCUEIL</a>
+            <a href="\ozeum\pro\view\front\index.php">ACCUEIL</a>
             <a href="\ozeum\adel\view\frontoffice\blogs.php">BLOG</a>
             <a href="\ozeum\ilyes\server\mvc\view\front\shop.php">BOUTIQUE</a>
             <a href="\ozeum\nour\view\addreclamation.php">AVIS</a>
@@ -56,12 +52,20 @@ if (isset($_SESSION['user_email'])) {
         </nav>
         <div class="dropdown-menu" id="profile-dropdown">
             <a href="\ozeum\saadbouznif\mvc\view\front\profileInfo.php" class="dropdown-item"><i>👤</i> Mon Compte</a>
-            <a href="#" class="dropdown-item"><i>🚪</i> Déconnecter</a>
+            <a href="\ozeum\logout.php" class="dropdown-item"><i>🚪</i> Déconnecter</a>
         </div>
-    </header> 
+    </header>
 
     <div class="hero">
         <div class="keyboard">
+        <span class="key">A</span>
+            <span class="key">c</span>
+            <span class="key">c</span>
+            <span class="key">u</span>
+            <span class="key">e</span>
+            <span class="key">i</span>
+            <span class="key">l</span>
+            <span class="key">/</span>
             <span class="key">B</span>
             <span class="key">O</span>
             <span class="key">U</span>
@@ -175,7 +179,7 @@ if (isset($_SESSION['user_email'])) {
     <?php if (!empty($cartItems)): ?>
         <?php foreach ($cartItems as $item): ?>
             <div class="cart-item">
-                <img src="../back/images/<?= htmlspecialchars($item['image']) ?>" alt="<?= htmlspecialchars($item['titre']) ?>">
+                <img src="../back/images/<?= htmlspecialchars($item['image']) ?>" alt="<?= htmlspecialchars($item['titre'])  ?>"class="cart-product-img"    >
                 <div>
                     <p><?= htmlspecialchars($item['titre']) ?></p>
                     <p><?= $item['quantity'] ?> × $<?= number_format($item['prix_promotion'], 2) ?></p>
@@ -208,8 +212,12 @@ if (isset($_SESSION['user_email'])) {
                     ?>
                     <ul class="categories-list">
                         <?php foreach ($categoryCounts as $categoryName => $count): ?>
-                            <li class="category-item">
-                                <a href="shop.php?category=<?= urlencode($categoryName) ?><?= $searchTerm ? '&search=' . urlencode($searchTerm) : '' ?><?= $minPrice !== null ? '&min_price=' . $minPrice : '' ?><?= $maxPrice !== null ? '&max_price=' . $maxPrice : '' ?>" 
+                            <li class="category-item" style="
+    padding: 0.5rem 0;
+    border-bottom: 1px solid #ddd;
+    cursor: pointer;
+    transition: background-color 0.3s ease;>
+                                <a  href="shop.php?category=<?= urlencode($categoryName) ?><?= $searchTerm ? '&search=' . urlencode($searchTerm) : '' ?><?= $minPrice !== null ? '&min_price=' . $minPrice : '' ?><?= $maxPrice !== null ? '&max_price=' . $maxPrice : '' ?>" 
                                    class="<?= $category === $categoryName ? 'active-category' : '' ?>">
                                     <?= htmlspecialchars($categoryName) ?> 
                                     <span class="category-count"><?= $count ?></span>

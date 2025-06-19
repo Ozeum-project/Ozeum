@@ -1,3 +1,7 @@
+<?php 
+session_start();
+
+?>
     <!DOCTYPE html>
     <html lang="en">
     <head>
@@ -6,6 +10,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Ozeum - Blog</title>
         <link rel="stylesheet" href="blogsstyles.css">
+        <link rel="stylesheet" href="\ozeum\stylefe.css">
         <script>
             // Function to display blog details in a modal
             function showBlogDetails(blog) {
@@ -41,33 +46,54 @@
         </script>
     </head>
     <body>
+    <?php if (isset($_SESSION['user']['role'])): ?>
+    <div class="user-role" style="position: fixed; top: 10px; right: 10px; background: #f5f5f5; padding: 5px 10px; border-radius: 4px; z-index: 1000;">
+        Connecté en tant que: <strong><?= 
+            htmlspecialchars(
+                $_SESSION['user']['role'] === 'admin' ? 
+                'Administrateur' : 
+                'Utilisateur'
+            ) 
+        ?></strong>
+    </div>
+<?php endif; ?>
         <!-- Header with navigation -->
-        <header>
-            <div class="logo">ozeum</div>
-            <nav class="main-nav">
-            <nav class="nav">
-            <a href="\ozeum\pro\view\front\index.php">ACCUEIL</a>
+        <header class="header">
+        <div class="logo">ozeum</div>
+        <nav class="nav">
+        <a href="\ozeum\pro\view\front\index.php">ACCUEIL</a>
             <a href="\ozeum\adel\view\frontoffice\blogs.php">BLOG</a>
             <a href="\ozeum\ilyes\server\mvc\view\front\shop.php">BOUTIQUE</a>
             <a href="\ozeum\nour\view\addreclamation.php">AVIS</a>
             <a href="\ozeum\ghofrane\view\frontoffice\acceuil.php">GALLERIE</a>
-          <a href="/ozeum/saadbouznif/mvc/view/front/signin.php" class="nav-item">LOGIN</a>
+            <?php if (isset($_SESSION['user_email'])): ?>
+                <a href="#" class="nav-item" id="profile-link">PROFILE</a>
+            <?php else: ?>
+              <a href="/ozeum/saadbouznif/mvc/view/front/signin.php" class="nav-item">LOGIN</a>
+            <?php endif; ?>
         </nav>
-                <script>
-                    // Ensure modal closes when clicking outside the modal content
-                    document.addEventListener('DOMContentLoaded', function() {
-                        const modal = document.getElementById('blogDetailsModal');
-                        if (modal) {
-                            modal.addEventListener('click', function(event) {
-                                if (event.target === modal) {
-                                    closeBlogModal();
-                                }
-                            });
-                        }
-                    });
-                </script>
-            </nav>
-        </header>
+        <div class="dropdown-menu" id="profile-dropdown">
+            <a href="\ozeum\saadbouznif\mvc\view\front\profileInfo.php" class="dropdown-item"><i>👤</i> Mon Compte</a>
+            <a href="#" class="dropdown-item"><i>🚪</i> Déconnecter</a>
+        </div>
+    </header> 
+    <div class="hero">
+        <div class="keyboard">
+            <span class="key">A</span>
+            <span class="key">c</span>
+            <span class="key">c</span>
+            <span class="key">u</span>
+            <span class="key">e</span>
+            <span class="key">i</span>
+            <span class="key">l</span>
+            <span class="key">/</span>
+            <span class="key">B</span>
+            <span class="key">L</span>
+            <span class="key">O</span>
+            <span class="key">G</span>
+            <span class="key">S</span>
+          </div>
+    </div>
         
         <!-- Main blog section -->
         <section class="blog-section">
@@ -170,5 +196,30 @@
         
         <!-- Scroll to top button -->
         <a href="#" class="scroll-top">↑</a>
+
+        <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const profileLink = document.getElementById('profile-link');
+            const profileDropdown = document.getElementById('profile-dropdown');
+            
+            profileLink.addEventListener('click', function(e) {
+                e.preventDefault();
+                e.stopPropagation(); // Prevent event from bubbling up
+                profileDropdown.classList.toggle('active');
+            });
+            
+            // Close dropdown when clicking outside
+            document.addEventListener('click', function(e) {
+                if (!profileLink.contains(e.target) && !profileDropdown.contains(e.target)) {
+                    profileDropdown.classList.remove('active');
+                }
+            });
+            
+            // Prevent dropdown from closing when clicking inside it
+            profileDropdown.addEventListener('click', function(e) {
+                e.stopPropagation();
+            });
+        });
+    </script>
     </body>
     </html>

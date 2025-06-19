@@ -8,6 +8,8 @@ session_start();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Avis et Réclamations</title>
     <link rel="stylesheet" href="reclamations.css">
+    <link rel="stylesheet" href="\ozeum\stylefe.css">
+
     
 </head>
 <body>
@@ -93,18 +95,29 @@ session_start();
         <!-- Dashboard Header -->
         <header class="dashboard-header">
             <h1 class="page-title">Avis et Réclamations</h1>
-            <?php if (isset($_SESSION['user_email'])): ?>
-        <a href="#" id="admin-profile-link">
             
-        
-        </a>
-        <div class="dropdown-menu" id="admin-profile-dropdown">
-
-            <a href="\ozeum\logout.php" class="dropdown-item">Déconnecter</a>
+                <?php if (isset($_SESSION['user_email'])): ?>
+                <a href="#" 
+   class="nav-item" 
+   id="profile-link"
+   style="
+       padding: 0.5rem 1rem;
+       color: inherit;
+       text-decoration: none;
+       font-weight: 500;
+       transition: color 0.3s ease;
+       border-radius: 4px;
+   ">
+    PROFILE
+</a>
+            <?php else: ?>
+              <a href="/ozeum/saadbouznif/mvc/view/front/signin.php" class="nav-item">LOGIN</a>
+            <?php endif; ?>
+        </nav>
+        <div class="dropdown-menu" id="profile-dropdown">
+            <a href="\ozeum\saadbouznif\mvc\view\front\profileInfo.php" class="dropdown-item"><i>👤</i> Mon Compte</a>
+            <a href="\ozeum\logout.php" class="dropdown-item"><i>🚪</i> Déconnecter</a>
         </div>
-    <?php else: ?>
-        <a href="/ozeum/saadbouznif/mvc/view/front/signin.php">Connexion</a>
-    <?php endif; ?>
         </header>
 
         <!-- Stats Overview -->

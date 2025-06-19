@@ -70,12 +70,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $userEmail) {
             <a href="\ozeum\ilyes\server\mvc\view\front\shop.php">BOUTIQUE</a>
             <a href="\ozeum\nour\view\addreclamation.php">AVIS</a>
             <a href="\ozeum\ghofrane\view\frontoffice\acceuil.php">GALLERIE</a>
-          <a href="/ozeum/saadbouznif/mvc/view/front/signin.php" class="nav-item">LOGIN</a>
+            <?php if (isset($_SESSION['user_email'])): ?>
+                <a href="#" class="nav-item" id="profile-link">PROFILE</a>
+            <?php else: ?>
+              <a href="/ozeum/saadbouznif/mvc/view/front/signin.php" class="nav-item">LOGIN</a>
+            <?php endif; ?>
         </nav>
         <div class="dropdown-menu" id="profile-dropdown">
-            <a href="#" class="dropdown-item"><i>👤</i> Modifier Profil</a>
-            <!-- <a href="#" class="dropdown-item"><i>🔑</i> Changer Mot de Passe</a> -->
-            <a href="#" class="dropdown-item"><i>🚪</i> Se Déconnecter</a>
+            <a href="\ozeum\saadbouznif\mvc\view\front\profileInfo.php" class="dropdown-item"><i>👤</i> Mon Compte</a>
+            <a href="\ozeum\logout.php" class="dropdown-item"><i>🚪</i> Déconnecter</a>
         </div>
     </header>
 
